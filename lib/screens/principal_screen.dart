@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:phisio_t/widgets/formulario_web.dart';
 
 
 
@@ -79,7 +80,7 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
       ),
       body: ListView(
         children: [
-          formulario(height, width)
+          FormularioWeb(height, width)
         ],
       ),
       bottomNavigationBar: BottomNavigation(
@@ -90,62 +91,6 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
 
   }
 
-
-  Widget formulario(double height, double width){
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: height*0.1, left: width*0.65, right: width*0.1),
-          child: campoTexto('Fecha:', width*0.25)
-          ),
-        Container(
-          margin: EdgeInsets.only(top: height*0.05, left: width*0.1, right: width*0.1),
-          child: Row(
-            children: [
-              campoTexto('Nombre:', width*0.5),
-              campoTexto('Telefono:', width*0.30)
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: height*0.02, left: width*0.1, right: width*0.1),
-            child: Row(
-            children: [
-              campoTexto('Edad:', width*0.15),
-              campoTexto('Fecha de N:', width*0.30),
-              campoTexto('Ocupacion:', width*0.35)
-            ],
-          ),
-          ),
-          Container(
-          margin: EdgeInsets.only(top: height*0.02, left: width*0.1, right: width*0.1),
-            child: Row(
-            children: [
-              campoTexto('Direccion:', width*0.35),
-              campoTexto('Enf. Cronica:', width*0.45),
-            ],
-          ),
-          )
-      ],
-    );
-  }
-
-
-  Widget campoTexto(String label, double largo){
-    return Container(
-          color: Colors.grey,
-          width: largo,
-          height: 50,
-          child: Row(children: [
-            Container(
-              child: Text(label),
-            ),
-            Expanded(
-              child: Container(color: Colors.amber),
-            )
-          ]),
-        );
-  }
 
 }
 
