@@ -27,6 +27,11 @@ const Map<TabItem, MaterialColor> activeTabColor = {
 
 class _PrincipalScreenState extends State<PrincipalScreen> {
   
+  bool isCheckedH = false;
+  bool isCheckedD = false;
+  bool isCheckedA = false;
+  bool isCheckedP = false;
+
   final TextEditingController txtFecha = TextEditingController();
 
   var _currentTab = TabItem.Expediente;
@@ -55,7 +60,8 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
       appBar: AppBar(
         elevation: 50,
         backgroundColor: Colors.blueAccent,
-        title: const Text('Fisioterapeuta'),
+        centerTitle: true,
+        title: const Text('Nuevo Paciente'),
       ),
       drawer: Drawer(
         elevation: 30,
@@ -84,18 +90,19 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Container(
-              margin: EdgeInsets.only(top: 30, bottom: 5, right: 20),
+            /*Container(
+              margin: EdgeInsets.only(top: 20, bottom: 5, right: 20),
               child: const Text('Nuevo Paciente', 
               style: TextStyle(
                 fontSize: 25, 
                 fontWeight: FontWeight.w100,
                 color: Colors.blue),
                 )
-              ),
+              ),*/
             Container(
-              height: height*0.75,
+              height: height*0.8,
               width: 450,
+              margin: EdgeInsets.only(top: height*0.02),
 
               //Solo decoracion, donde se le da color de fondo, sombra y tamaño
 
@@ -159,6 +166,26 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
                             ),
                         ],
                       ),
+                      Container(
+                        margin: EdgeInsets.only(top: 15),
+                        child: inputField('Dirección', 350)
+                      ),
+                       Container(
+                        margin: EdgeInsets.only(top: 15),
+                        child: inputField('Ocupación', 350)
+                      ),
+                      checkRow(width),
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 10),
+                            child: boton('Guardar', Colors.green)),
+                          Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: boton('Cancelar', Colors.red))
+                        ],
+                   )
                 ]
                 ),
             ),
@@ -206,8 +233,6 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
         borderRadius: BorderRadius.all(Radius.circular(4))
     );
 
-
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -237,16 +262,11 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
               keyboardType: tipo == 'numero' ? TextInputType.number : TextInputType.text,
               enableSuggestions: false,
               cursorColor: Colors.blue,
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.w400, fontFamily: 'Montserrat'),
               decoration: InputDecoration(
                 hintText: hint,
-                contentPadding: EdgeInsets.only(
-                    bottom: 10,
-                    top: 10,
-                    left: 20,
-                    right: 20
-                ),
-                isDense: true,
+                contentPadding: EdgeInsets.only(top: 15),
                 border: inputBorder,
                 focusedBorder: inputBorder,
                 enabledBorder: inputBorder,
@@ -272,18 +292,105 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
       _selectedDate = newSelectedDate;
       setState(() {
         var fecha_publicacion = DateFormat("yyyy-MM-dd").format(_selectedDate!);
-        //txtInicioPub.text = fecha_publicacion;
+        txtFecha.text = fecha_publicacion;
       });
     }
   }
 
+  Widget checkRow(double width){
+    return Container(
+      height: 50,
+      width: width,
+      margin: EdgeInsets.only(top: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+        Container(
+          width: 350/4,
+          child: Column(
+            children: [
+            Text('Hipertensión', style: TextStyle(fontWeight: FontWeight.w600)),
+             Checkbox( 
+              value: isCheckedH,
+              fillColor: MaterialStateProperty.all(Colors.blue),
+              onChanged: (bool? value) {
+                setState(() {
+                  isCheckedH = value!;
+                });
+              },)
+          ]),
+          ),
+        Container(
+          width: 350/4,
+          child: Column(
+            children: [
+            Text('Diabetes', style: TextStyle(fontWeight: FontWeight.w600)),
+             Checkbox( 
+              value: isCheckedD,
+              fillColor: MaterialStateProperty.all(Colors.blue),
+              onChanged: (bool? value) {
+                setState(() {
+                  isCheckedD = value!;
+                });
+              },)
+          ]),
+          ),
+        Container(
+          width: 350/4,
+          child: Column(
+            children: [
+            Text('Art/Ost', style: TextStyle(fontWeight: FontWeight.w600)),
+             Checkbox( 
+              fillColor: MaterialStateProperty.all(Colors.blue),
+              value: isCheckedA,
+              onChanged: (bool? value) {
+                setState(() {
+                  isCheckedA = value!;
+                });
+              },)
+          ]),
+          ),
+        Container(
+          width: 350/4,
+          child: Column(
+            children: [
+            Text('E. Pulmonar', style: TextStyle(fontWeight: FontWeight.w600)),
+             Checkbox( 
+              fillColor: MaterialStateProperty.all(Colors.blue),
+              value: isCheckedP,
+              onChanged: (bool? value) {
+                setState(() {
+                  isCheckedP = value!;
+                });
+              },)
+          ]), 
+          ),    
+      ]),
+    );
+  }
+
+  Widget boton(String label, Color color){
+  return Container(
+    margin: EdgeInsets.only(top: 15),
+    height: 40,
+    width: 100,
+    child: ElevatedButton(
+      child: 
+      Text('${label}'),
+      onPressed: (){},
+      style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(color),
+      ),
+      )
+    );
+}
 
 }
 
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
-}
+}                     
 
 
 
