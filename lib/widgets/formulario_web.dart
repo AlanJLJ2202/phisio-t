@@ -15,7 +15,17 @@ class _FormularioWebState extends State<FormularioWeb> {
   
   final double width;
   final double height;
-  final TextEditingController fechaCtrl = TextEditingController();
+  final TextEditingController nombreCtrl = TextEditingController();
+  final TextEditingController apellidoPCtrl = TextEditingController();
+  final TextEditingController apellidoMCtrl = TextEditingController();
+  final TextEditingController telefonoCtrl = TextEditingController();
+  final TextEditingController edadCtrl = TextEditingController();
+  final TextEditingController fechaNCtrl = TextEditingController();
+  final TextEditingController ocupacionCtrl = TextEditingController();
+  final TextEditingController direccionCtrl = TextEditingController();
+  final TextEditingController enfCronicaCtrl = TextEditingController();
+
+
 
   _FormularioWebState(this.width, this.height);
 
@@ -24,37 +34,58 @@ class _FormularioWebState extends State<FormularioWeb> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+
+        //TITULO
         Container(
-          margin: EdgeInsets.only(top: height*0.1, left: width*0.65, right: width*0.1),
-          child: campoTexto('Fecha', width*0.25, TextInputType.datetime, fechaCtrl, 10)
+          margin: EdgeInsets.only(top: 30),
+          child: 
+          const Text('Nuevo paciente', style: TextStyle(fontSize: 35)
           ),
+        ),
+
+        //FORMULARIO
         Container(
-          margin: EdgeInsets.only(top: height*0.05, left: width*0.4, right: width*0.1),
+          margin: EdgeInsets.only(top: height*0.05, left: width*0.5, right: width*0.1),
           child: Row(
             children: [
-              campoTexto('Nombre', width*0.5, TextInputType.datetime, fechaCtrl, 10),
-              campoTexto('Telefono', width*0.30, TextInputType.datetime, fechaCtrl, 10)
+              campoTexto('Nombre', width*0.3, TextInputType.name, nombreCtrl, 25),
+              campoTexto('Apellido P', width*0.3, TextInputType.name, apellidoPCtrl, 25),
+              campoTexto('Apellido M', width*0.3, TextInputType.name, apellidoMCtrl, 25),
             ],
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: height*0.02, left: width*0.1, right: width*0.1),
+          margin: EdgeInsets.only(top: height*0.02, left: width*0.45, right: width*0.1),
             child: Row(
             children: [
-              campoTexto('Edad', width*0.15, TextInputType.datetime, fechaCtrl, 10),
-              campoTexto('Fecha de N', width*0.30, TextInputType.datetime, fechaCtrl, 10),
-              campoTexto('Ocupacion', width*0.35, TextInputType.datetime, fechaCtrl, 10)
+              campoTexto('Telefono', width*0.2, TextInputType.number, telefonoCtrl, 10),
+              campoTexto('Edad', width*0.15, TextInputType.datetime, edadCtrl, 2),
+              campoTexto('Fecha de N', width*0.30, TextInputType.datetime, fechaNCtrl, 10),
+              campoTexto('Ocupacion', width*0.35, TextInputType.datetime, ocupacionCtrl, 20)
             ],
           ),
           ),
           Container(
-          margin: EdgeInsets.only(top: height*0.02, left: width*0.1, right: width*0.1),
+          margin: EdgeInsets.only(top: height*0.02, left: width*0.45, right: width*0.1),
             child: Row(
             children: [
-              campoTexto('Direccion', width*0.35, TextInputType.datetime, fechaCtrl, 10),
-              campoTexto('Enf. Cronica', width*0.45, TextInputType.datetime, fechaCtrl, 10),
+              campoTexto('Direccion', width*0.35, TextInputType.datetime, direccionCtrl, 35),
+              campoTexto('Enf. Cronica', width*0.45, TextInputType.datetime, enfCronicaCtrl, 50),
             ],
           ),
+          ),
+
+          //BOTON
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 10),
+                child: boton('Guardar', Colors.blue)),
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                child: boton('Cancelar', Colors.red))
+            ],
           )
       ],
     );
@@ -95,5 +126,24 @@ Widget campoTexto(String label, double largo, TextInputType input, TextEditingCo
           ]),
         );
   }
+
+
+Widget boton(String label, Color color){
+  return Container(
+    margin: EdgeInsets.only(top: 50),
+    height: 50,
+    width: 150,
+    child: ElevatedButton(
+      child: 
+      Text('${label}'),
+      onPressed: (){},
+      style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(color),
+      ),
+      )
+    );
+}
+
+
 
 }
