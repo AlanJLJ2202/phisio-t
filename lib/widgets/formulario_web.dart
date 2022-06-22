@@ -112,10 +112,8 @@ Widget campoTexto(String label, double largo, TextInputType input, TextEditingCo
                 color: Colors.black87
             ),
             decoration: const InputDecoration(
-                //border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top:14),
                 counterText: '',
-                //hintText: 'Email',
                 hintStyle: TextStyle(
                     color: Colors.black38
                 )

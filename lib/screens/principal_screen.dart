@@ -12,19 +12,6 @@ class PrincipalScreen extends StatefulWidget {
 }
 
 
-enum TabItem { Expediente, Agenda}
-
-const Map<TabItem, String> tabName = {
-  TabItem.Expediente: 'Expediente',
-  TabItem.Agenda: 'Agenda',
- 
-};
-
-const Map<TabItem, MaterialColor> activeTabColor = {
-  TabItem.Expediente: Colors.lightBlue,
-  TabItem.Agenda: Colors.lightBlue,
-};
-
 class _PrincipalScreenState extends State<PrincipalScreen> {
   
   bool isCheckedH = false;
@@ -34,31 +21,16 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
 
   final TextEditingController txtFecha = TextEditingController();
 
-  var _currentTab = TabItem.Expediente;
-  final _navigatorKeys = {
-    TabItem.Expediente: GlobalKey<NavigatorState>(),
-    TabItem.Agenda: GlobalKey<NavigatorState>(),
-  };
-
-  void _selectTab(TabItem tabItem) {
-    if (tabItem == _currentTab) {
-      // pop to first route
-      _navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
-    } else {
-      setState(() => _currentTab = tabItem);
-    }
-  }
-  
+ 
   @override
   Widget build(BuildContext context) {
   
     double width = MediaQuery. of(context).size.width ;
     double height = MediaQuery. of(context).size.height;
 
-
     return Scaffold(
       appBar: AppBar(
-        elevation: 50,
+        elevation: 20,
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
         title: const Text('Nuevo Paciente'),
@@ -90,15 +62,6 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            /*Container(
-              margin: EdgeInsets.only(top: 20, bottom: 5, right: 20),
-              child: const Text('Nuevo Paciente', 
-              style: TextStyle(
-                fontSize: 25, 
-                fontWeight: FontWeight.w100,
-                color: Colors.blue),
-                )
-              ),*/
             Container(
               height: height*0.8,
               width: 450,
@@ -128,67 +91,71 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
                 //Esto es lo que lleva dentro el contenedor primario
 
                 child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 15),
-                      child: inputField('Nombre(s)', 350)
-                      ),
+                    children: [
                       Container(
                         margin: const EdgeInsets.only(top: 15),
-                        child: const Text('Apellidos', style: TextStyle(fontWeight: FontWeight.w600))),
-                      Container(
-                        margin: EdgeInsets.only(top: 15),
-                        child: Row(
+                        child: inputField('Nombre(s)', 350)
+                        ),
+                        /*Container(
+                          margin: const EdgeInsets.only(top: 15),
+                          child: const Text('Apellidos', style: TextStyle(fontWeight: FontWeight.w600))),*/
+                        Container(
+                          margin: EdgeInsets.only(top: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(right: 20),
+                                child: inputField('Paterno', 150)),
+                              Container(
+                                margin: const EdgeInsets.only(left: 20),
+                                child: inputField('Materno', 150))
+                          ]),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 15),
+                          child: inputField('Telefono', 350)
+                          ),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(right: 20),
-                              child: inputField('Paterno', 150)),
-                            Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              child: inputField('Materno', 150))
-                        ]),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 15),
-                        child: inputField('Telefono', 350)
+                              margin: EdgeInsets.only(top: 15, right: 10),
+                              child: inputField('Edad', 75)
+                              ),
+                              Container(
+                              margin: EdgeInsets.only(top: 15, left: 10),
+                              child: inputDate(txtFecha, 'date', context, txtFecha.text)
+                              ),
+                          ],
                         ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 15, right: 10),
-                            child: inputField('Edad', 75)
-                            ),
+                        Container(
+                          margin: EdgeInsets.only(top: 15),
+                          child: inputField('Dirección', 350)
+                        ),
+                         Container(
+                          margin: EdgeInsets.only(top: 15),
+                          child: inputField('Ocupación', 350)
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 15),
+                          child: inputField('Enfermedad cronica', 350)
+                          ),
+                        checkRow(width),
+                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
                             Container(
-                            margin: EdgeInsets.only(top: 15, left: 10),
-                            child: inputDate(txtFecha, 'date', context, txtFecha.text)
-                            ),
-                        ],
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 15),
-                        child: inputField('Dirección', 350)
-                      ),
-                       Container(
-                        margin: EdgeInsets.only(top: 15),
-                        child: inputField('Ocupación', 350)
-                      ),
-                      checkRow(width),
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 10),
-                            child: boton('Guardar', Colors.green)),
-                          Container(
-                            margin: EdgeInsets.only(left: 10),
-                            child: boton('Cancelar', Colors.red))
-                        ],
-                   )
-                ]
+                              margin: EdgeInsets.only(right: 10),
+                              child: boton('Guardar', Colors.green, height)),
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: boton('Cancelar', Colors.red, height))
+                          ],
+                     ),
+                  ]
+                  ),
                 ),
-            ),
           ],
         ),
       ),
@@ -199,6 +166,46 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
     );
 
   }
+
+//En esta parte se crean las funciones y los metodos dentro del contexto de la clase
+
+    var _currentTab = TabItem.Expediente;
+
+    final _navigatorKeys = {
+    TabItem.Expediente: GlobalKey<NavigatorState>(),
+    TabItem.Agenda: GlobalKey<NavigatorState>(),
+    };
+
+    void _selectTab(TabItem tabItem) {
+      if (tabItem == _currentTab) {
+      // pop to first route
+       _navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
+      } else {
+      setState(() => _currentTab = tabItem);
+      }
+    }
+
+    _selectFirstDate(context) async{
+    DateTime? _selectedDate = null;
+    DateTime? newSelectedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
+      firstDate: DateTime.utc(1950),
+      lastDate: DateTime.now(),
+        helpText: 'Selecciona una fecha',
+        cancelText: 'Cancelar'
+    );
+
+    if(newSelectedDate != null){
+      _selectedDate = newSelectedDate;
+      setState(() {
+        var fecha_publicacion = DateFormat("yyyy-MM-dd").format(_selectedDate!);
+        txtFecha.text = fecha_publicacion;
+      });
+    }
+  }
+
+//Componentes personalizados por nosotros que reciben parametros dinamicos
 
   Widget inputField(String label, double largo){
     return Column(
@@ -277,26 +284,6 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
     );
   }
 
-   _selectFirstDate(context) async{
-    DateTime? _selectedDate = null;
-    DateTime? newSelectedDate = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365 * 3)),
-        helpText: 'Selecciona una fecha',
-        cancelText: 'Cancelar'
-    );
-
-    if(newSelectedDate != null){
-      _selectedDate = newSelectedDate;
-      setState(() {
-        var fecha_publicacion = DateFormat("yyyy-MM-dd").format(_selectedDate!);
-        txtFecha.text = fecha_publicacion;
-      });
-    }
-  }
-
   Widget checkRow(double width){
     return Container(
       height: 50,
@@ -369,10 +356,10 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
     );
   }
 
-  Widget boton(String label, Color color){
+  Widget boton(String label, Color color, double ancho){
   return Container(
     margin: EdgeInsets.only(top: 15),
-    height: 40,
+    height: 38,
     width: 100,
     child: ElevatedButton(
       child: 
@@ -391,7 +378,6 @@ class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
 }                     
-
 
 
 class BottomNavigation extends StatelessWidget {
@@ -430,4 +416,19 @@ class BottomNavigation extends StatelessWidget {
   }
 }
 
+
+/*Se crean los Items de la barra de navegacion inferior*/
+
+enum TabItem {Expediente, Agenda}
+
+const Map<TabItem, String> tabName = {
+  TabItem.Expediente: 'Expediente',
+  TabItem.Agenda: 'Agenda',
+ 
+};
+
+const Map<TabItem, MaterialColor> activeTabColor = {
+  TabItem.Expediente: Colors.lightBlue,
+  TabItem.Agenda: Colors.lightBlue,
+};
 
