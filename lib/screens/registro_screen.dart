@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:phisio_t/widgets/formulario_web.dart';
 import 'package:intl/intl.dart';
 
+import '../widgets/navigationbar_widget.dart';
+import 'home_screen.dart';
 
 
 
-class PrincipalScreen extends StatefulWidget {
+
+class RegistroScreen extends StatefulWidget {
   @override
-  State<PrincipalScreen> createState() => _PrincipalScreenState();
+  State<RegistroScreen> createState() => _RegistroScreenState();
 }
 
 
-class _PrincipalScreenState extends State<PrincipalScreen> {
+class _RegistroScreenState extends State<RegistroScreen> {
   
   bool isCheckedH = false;
   bool isCheckedD = false;
@@ -40,17 +43,51 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(top: height*0.1),
+              margin: EdgeInsets.only(top: height*0.1, bottom: 40),
               child: const Text('Rehabilit', 
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w100)
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w100, color: Colors.blue, fontFamily: 'Raleway')
               )
               ),
+              Divider(
+              height: 1,
+              color: Colors.blue,
+            ),
+            ListTile(
+              title: const Text('Principal'),
+              leading: const Icon(Icons.home_filled),
+              iconColor: Colors.blue,
+              onTap: () {
+                Navigator.push(
+                  context,
+                   MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
+            ),
+              Divider(
+              height: 1,
+              color: Colors.blue,
+            ),
+            ListTile(
+              title: const Text('Nuevo Paciente'),
+              leading: const Icon(Icons.personal_injury_outlined),
+              iconColor: Colors.blue,
+              onTap: () {
+                //Navigator.pop(context);
+                 Navigator.push(
+                  context,
+                   MaterialPageRoute(builder: (context) => RegistroScreen()),
+                );
+              },
+            ),
+            Divider(
+              height: 1,
+              color: Colors.blue,
+            ),
             Container(
-              margin: EdgeInsets.only(top: height*0.7),
+              margin: EdgeInsets.only(top: height*0.5),
               child: ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color> (Colors.blue)),
-                onPressed: (){
-                  
+                onPressed: (){ 
                 }, 
                 child: const Text('Cerrar sesión')
                 ),
@@ -93,14 +130,14 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
                 child: Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(top: 15),
+                        margin: const EdgeInsets.only(top: 10),
                         child: inputField('Nombre(s)', 350)
                         ),
                         /*Container(
                           margin: const EdgeInsets.only(top: 15),
                           child: const Text('Apellidos', style: TextStyle(fontWeight: FontWeight.w600))),*/
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: EdgeInsets.only(top: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -113,32 +150,32 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
                           ]),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: EdgeInsets.only(top: 10),
                           child: inputField('Telefono', 350)
                           ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 15, right: 10),
+                              margin: EdgeInsets.only(top: 10, right: 10),
                               child: inputField('Edad', 75)
                               ),
                               Container(
-                              margin: EdgeInsets.only(top: 15, left: 10),
+                              margin: EdgeInsets.only(top: 10, left: 10),
                               child: inputDate(txtFecha, 'date', context, txtFecha.text)
                               ),
                           ],
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: EdgeInsets.only(top: 10),
                           child: inputField('Dirección', 350)
                         ),
                          Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: EdgeInsets.only(top: 10),
                           child: inputField('Ocupación', 350)
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: EdgeInsets.only(top: 10),
                           child: inputField('Enfermedad cronica', 350)
                           ),
                         checkRow(width),
@@ -380,41 +417,7 @@ class AlwaysDisabledFocusNode extends FocusNode {
 }                     
 
 
-class BottomNavigation extends StatelessWidget {
-  BottomNavigation({required this.currentTab, required this.onSelectTab});
-  final TabItem currentTab;
-  final ValueChanged<TabItem> onSelectTab;
 
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      items: [
-        _buildItem(TabItem.Expediente, Icons.analytics_outlined),
-        _buildItem(TabItem.Agenda, Icons.calendar_month_outlined),
-      ],
-      onTap: (index) => onSelectTab(
-        TabItem.values[index],
-      ),
-      currentIndex: currentTab.index,
-      selectedItemColor: activeTabColor[currentTab]!,
-    );
-  }
-
-  BottomNavigationBarItem _buildItem(TabItem tabItem, IconData icono) {
-    return BottomNavigationBarItem(
-      icon: Icon(
-        icono,
-        color: _colorTabMatching(tabItem),
-      ),
-      label: tabName[tabItem],
-    );
-  }
-
-  Color _colorTabMatching(TabItem item) {
-    return currentTab == item ? activeTabColor[item]! : Colors.grey;
-  }
-}
 
 
 /*Se crean los Items de la barra de navegacion inferior*/
@@ -432,3 +435,4 @@ const Map<TabItem, MaterialColor> activeTabColor = {
   TabItem.Agenda: Colors.lightBlue,
 };
 
+ 
