@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phisio_t/screens/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
 
 import 'screens/home_screen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
 
       ),
       
-      home: HomeScreen(),
+      home: Registro2Screen(),
       debugShowCheckedModeBanner: false,
     );
   }

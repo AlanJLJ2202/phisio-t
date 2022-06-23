@@ -1,6 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:phisio_t/screens/registro2_screen.dart';
+import 'package:phisio_t/screens/registro_screen.dart';
 
 import '../widgets/navigationbar_widget.dart';
 import 'home_screen.dart';
@@ -8,13 +9,13 @@ import 'home_screen.dart';
 
 
 
-class RegistroScreen extends StatefulWidget {
+class Registro2Screen extends StatefulWidget {
   @override
-  State<RegistroScreen> createState() => _RegistroScreenState();
+  State<Registro2Screen> createState() => _Registro2ScreenState();
 }
 
 
-class _RegistroScreenState extends State<RegistroScreen> {
+class _Registro2ScreenState extends State<Registro2Screen> {
   
   bool isCheckedH = false;
   bool isCheckedD = false;
@@ -116,10 +117,11 @@ class _RegistroScreenState extends State<RegistroScreen> {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: height*0.8,
-              width: 450,
+              height: height*0.55,
+              width: 650,
               margin: EdgeInsets.only(top: height*0.02),
 
               //Solo decoracion, donde se le da color de fondo, sombra y tamaño
@@ -147,64 +149,63 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
                 child: Column(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        child: inputField('Nombre(s)', 350)
-                        ),
-                        /*Container(
-                          margin: const EdgeInsets.only(top: 15),
-                          child: const Text('Apellidos', style: TextStyle(fontWeight: FontWeight.w600))),*/
+                     
                         Container(
                           margin: EdgeInsets.only(top: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                margin: const EdgeInsets.only(right: 20),
-                                child: inputField('Paterno', 150)),
-                              Container(
-                                margin: const EdgeInsets.only(left: 20),
-                                child: inputField('Materno', 150))
+                                Container(
+                                 margin: const EdgeInsets.only(top: 10),
+                                  child: inputField('Nombre(s)', 350)),
+                                Container(
+                                margin: const EdgeInsets.only(left: 20, top: 10),
+                                child: inputField('Telefono', 150)),
+                                /*Container(
+                                margin: const EdgeInsets.only(left: 20, top: 10),
+                                child: inputField('Materno', 120))*/
                           ]),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: inputField('Telefono', 350)
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                              Container(
+                              margin: EdgeInsets.only(top: 30, right: 10, left: 5),
+                              child: inputField('Edad', 75)
+                              ),
+                              Container(
+                              margin: EdgeInsets.only(top: 30, right: 15),
+                              child: inputDate(txtFecha, 'date', context, txtFecha.text)
+                              ),
+                              Container(
+                              margin: EdgeInsets.only(top: 30, right: 10, left: 10),
+                              child: inputField('Ocupación', 260)
+                              ),
+                          ],
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 10, right: 10),
-                              child: inputField('Edad', 75)
-                              ),
-                              Container(
-                              margin: EdgeInsets.only(top: 10, left: 10),
-                              child: inputDate(txtFecha, 'date', context, txtFecha.text)
-                              ),
+                              margin: EdgeInsets.only(top: 30),
+                              child: inputField('Dirección', 300)
+                            ),
+                            Container(
+                          margin: EdgeInsets.only(top: 30, left: 15),
+                          child: inputField('Enfermedad cronica', 200)
+                          ),
                           ],
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: inputField('Dirección', 350)
-                        ),
-                         Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: inputField('Ocupación', 350)
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: inputField('Enfermedad cronica', 350)
-                          ),
+                        
                         checkRow(width),
                          Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(right: 10),
+                              margin: EdgeInsets.only(right: 30),
                               child: boton('Guardar', Colors.green, height)),
                             Container(
-                              margin: EdgeInsets.only(left: 10),
+                              margin: EdgeInsets.only(left: 30),
                               child: boton('Cancelar', Colors.red, height))
                           ],
                      ),
@@ -214,17 +215,25 @@ class _RegistroScreenState extends State<RegistroScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigation(
-        currentTab: _currentTab, 
-        onSelectTab: _selectTab
-        )
+      bottomNavigationBar: BottomNavigationBar(
+          items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_filled),
+            label: 'Principal',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.personal_injury_outlined),
+            label: 'Nuevo Paciente',
+          ),
+      ]
+      )
     );
 
   }
 
 //En esta parte se crean las funciones y los metodos dentro del contexto de la clase
 
-    var _currentTab = TabItem.Expediente;
+    var _currentTabb = TabItem.Expediente;
 
     final _navigatorKeys = {
     TabItem.Expediente: GlobalKey<NavigatorState>(),
@@ -232,11 +241,11 @@ class _RegistroScreenState extends State<RegistroScreen> {
     };
 
     void _selectTab(TabItem tabItem) {
-      if (tabItem == _currentTab) {
+      if (tabItem == _currentTabb) {
       // pop to first route
        _navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
       } else {
-      setState(() => _currentTab = tabItem);
+      setState(() => _currentTabb = tabItem);
       }
     }
 
@@ -304,7 +313,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
             ),
             Container(
               height: 35,
-              width: 250,
+              width: 150,
               padding: EdgeInsets.only(left: 10, right: 10),
               decoration: BoxDecoration(
               border: Border.all(color: Colors.blue, width: 1),
@@ -413,9 +422,9 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
   Widget boton(String label, Color color, double ancho){
   return Container(
-    margin: EdgeInsets.only(top: 15),
-    height: 38,
-    width: 100,
+    margin: EdgeInsets.only(top: 10),
+    height: 50,
+    width: 125,
     child: ElevatedButton(
       child: 
       Text('${label}'),
