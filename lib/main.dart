@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
+      scrollBehavior: CustomScrollBehavior(),
       title: 'Fisioterapeuta',
       theme: ThemeData(
         primaryColor: Colors.lightBlue,
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
 
       ),
       
-      home: Registro2Screen(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
