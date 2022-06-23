@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phisio_t/screens/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
+import 'package:phisio_t/utils/colores.dart';
 
 import 'screens/home_screen.dart';
 
@@ -18,11 +19,13 @@ class MyApp extends StatelessWidget {
       scrollBehavior: CustomScrollBehavior(),
       title: 'Fisioterapeuta',
       theme: ThemeData(
-        primaryColor: Colors.lightBlue,
+        primarySwatch: Colors.blue,
+        primaryColor: Colores.celeste,
         textTheme: Theme.of(context).textTheme.apply(
               fontFamily: "Raleway",
-              bodyColor: Colors.black,
-              displayColor: Colors.black
+              //bodyColor: Colors.white,
+              //displayColor: Colors.black
+              
             )
 
       ),

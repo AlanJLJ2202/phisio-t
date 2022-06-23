@@ -7,15 +7,16 @@ import 'package:phisio_t/screens/registro_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/colores.dart';
+import 'home_screen.dart';
 
 
 
-class HomeScreen extends StatefulWidget{
+class ExpedienteScreen extends StatefulWidget{
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ExpedienteScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<ExpedienteScreen> {
 
   String visible = "falso";
   Uri myUri = Uri.parse("https://wa.me/+524761364798?text=Prueba%20envio%20de%20mensaje%20de%20la%20app%20a%20Whatsapp");
@@ -39,15 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(top: height*0.1, bottom: 10),
+              margin: EdgeInsets.only(top: height*0.1, bottom: 40),
               child: const Text('Rehabilit', 
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, color: Colors.blue)
-              )
-              ),
-              Container(
-              margin: EdgeInsets.only(bottom: 40),
-              child: const Text('Cynthia', 
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.black, fontFamily: 'GreatVibes')
               )
               ),
               Divider(
@@ -105,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.blue,
             ),
             Container(
-              margin: EdgeInsets.only(top: height*0.4,),
+              margin: EdgeInsets.only(top: height*0.5),
               child: ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color> (Colors.blue)),
                 onPressed: (){ 

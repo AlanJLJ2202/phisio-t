@@ -29,6 +29,7 @@ environment:
 dependencies:
   intl: ^0.17.0
   fluttertoast: ^8.0.9
+  url_launcher: ^6.1.4
   flutter:
     sdk: flutter
 
@@ -88,7 +89,10 @@ flutter:
       fonts:
         - asset: assets/PoiretOne-Regular.ttf
           weight: 400
-          
+    - family: GreatVibes
+      fonts: 
+        - asset: assets/GreatVibes-Regular.ttf
+          weight: 400
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
