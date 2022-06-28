@@ -1,11 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:phisio_t/screens/registro2_screen.dart';
+import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
+import 'package:phisio_t/widgets/drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../utils/colores.dart';
 
 
@@ -23,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    double width = MediaQuery. of(context).size.width ;
-    double height = MediaQuery. of(context).size.height;
+    double width = MediaQuery.of(context).size.width ;
+    double height = MediaQuery.of(context).size.height;
     
 
     return Scaffold(
@@ -32,90 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 20,
         backgroundColor: Colors.blue,
         centerTitle: true,
-        title: const Text('Rehabilit', style: TextStyle(fontWeight: FontWeight.w800),),
+        title: const Text('Rehabilit - Fisioterapia Integral y Deporte', style: TextStyle(fontWeight: FontWeight.w800),),
       ),
-      drawer: Drawer(
-        elevation: 30,
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: height*0.1, bottom: 10),
-              child: const Text('Rehabilit', 
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, color: Colors.blue)
-              )
-              ),
-              Container(
-              margin: EdgeInsets.only(bottom: 40),
-              child: const Text('Cynthia', 
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.black, fontFamily: 'GreatVibes')
-              )
-              ),
-              Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Principal', 
-              style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              leading: const Icon(Icons.home_filled),
-              iconColor: Colors.blue,
-              onTap: () {
-                 Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-            ),
-              Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Nuevo paciente (#1)', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => RegistroScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Nuevo paciente (#2)', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => Registro2Screen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: height*0.4,),
-              child: ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color> (Colors.blue)),
-                onPressed: (){ 
-                }, 
-                child: const Text('Cerrar sesión')
-                ),
-            )
-        ]
-        ),
-      ),
+      drawer: DrawerWidget(height),
       body: ListView(
         children: [
           Column(
@@ -147,8 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       
                         });
                               
-                        
-                        
                       }, 
                       icon: Icon(Icons.search_rounded, color: Colors.blue,),
                       iconSize: 50,
@@ -291,7 +207,7 @@ Widget inputField(String label, double largo){
     width: 150,
     child: ElevatedButton(
       child: 
-      Text('${label}', style: TextStyle(fontSize: 20),),
+      Text(label, style: const TextStyle(fontSize: 20),),
       onPressed: (){},
       style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(color),

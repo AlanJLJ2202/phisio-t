@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:phisio_t/screens/registro2_screen.dart';
+import 'package:phisio_t/useless/registro2_screen.dart';
 
+import '../widgets/drawer.dart';
 import '../widgets/navigationbar_widget.dart';
 import 'home_screen.dart';
 
@@ -37,82 +38,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
         centerTitle: true,
         title: const Text('Nuevo Paciente', style: TextStyle(fontWeight: FontWeight.w800),),
       ),
-      drawer: Drawer(
-        elevation: 30,
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: height*0.1, bottom: 40),
-              child: const Text('Rehabilit', 
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, color: Colors.blue)
-              )
-              ),
-              Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Principal', 
-              style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              leading: const Icon(Icons.home_filled),
-              iconColor: Colors.blue,
-              onTap: () {
-                 Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-            ),
-              Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Nuevo paciente', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => RegistroScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Nuevo diseño', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => Registro2Screen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: height*0.5),
-              child: ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color> (Colors.blue)),
-                onPressed: (){ 
-                }, 
-                child: const Text('Cerrar sesión')
-                ),
-            )
-        ]
-        ),
-      ),
+      drawer: DrawerWidget(height),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -148,52 +74,40 @@ class _RegistroScreenState extends State<RegistroScreen> {
                 child: Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        child: inputField('Nombre(s)', 350)
-                        ),
-                        /*Container(
-                          margin: const EdgeInsets.only(top: 15),
-                          child: const Text('Apellidos', style: TextStyle(fontWeight: FontWeight.w600))),*/
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(right: 20),
-                                child: inputField('Paterno', 150)),
-                              Container(
-                                margin: const EdgeInsets.only(left: 20),
-                                child: inputField('Materno', 150))
-                          ]),
+                        margin: const EdgeInsets.only(top: 35),
+                        child: inputField('Nombre Completo', 350)
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
+                          margin: EdgeInsets.only(top: 15),
                           child: inputField('Telefono', 350)
                           ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 10, right: 10),
+                              margin: EdgeInsets.only(top: 15, right: 30),
                               child: inputField('Edad', 75)
                               ),
                               Container(
-                              margin: EdgeInsets.only(top: 10, left: 10),
-                              child: inputDate(txtFecha, 'date', context, txtFecha.text)
+                                margin: EdgeInsets.only(top: 15, left: 10),
+                                child: inputField('Fecha de nacimiento', 230)
                               ),
+                              //Container(
+                              //margin: EdgeInsets.only(top: 15, left: 10),
+                              //child: inputDate(txtFecha, 'date', context, txtFecha.text)
+                              //),
                           ],
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
+                          margin: EdgeInsets.only(top: 15),
                           child: inputField('Dirección', 350)
                         ),
                          Container(
-                          margin: EdgeInsets.only(top: 10),
+                          margin: EdgeInsets.only(top: 15),
                           child: inputField('Ocupación', 350)
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
+                          margin: EdgeInsets.only(top: 15),
                           child: inputField('Enfermedad cronica', 350)
                           ),
                         checkRow(width),

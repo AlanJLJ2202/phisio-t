@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
 
+import '../widgets/drawer.dart';
 import '../widgets/navigationbar_widget.dart';
-import 'home_screen.dart';
+import '../screens/home_screen.dart';
 
 
 
@@ -38,82 +39,7 @@ class _Registro2ScreenState extends State<Registro2Screen> {
         centerTitle: true,
         title: const Text('Nuevo Paciente', style: TextStyle(fontWeight: FontWeight.w800),),
       ),
-      drawer: Drawer(
-        elevation: 30,
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: height*0.1, bottom: 40),
-              child: const Text('Rehabilit', 
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900, color: Colors.blue)
-              )
-              ),
-              Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Principal', 
-              style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              leading: const Icon(Icons.home_filled),
-              iconColor: Colors.blue,
-              onTap: () {
-                 Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-            ),
-              Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Nuevo paciente', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => RegistroScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Nuevo diseño', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => Registro2Screen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: height*0.5),
-              child: ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color> (Colors.blue)),
-                onPressed: (){ 
-                }, 
-                child: const Text('Cerrar sesión')
-                ),
-            )
-        ]
-        ),
-      ),
+      drawer: DrawerWidget(height),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,

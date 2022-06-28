@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phisio_t/screens/registro2_screen.dart';
+import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
 import 'package:phisio_t/utils/colores.dart';
 
