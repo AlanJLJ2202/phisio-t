@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phisio_t/screens/expediente_screen.dart';
 import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
 import 'package:phisio_t/utils/colores.dart';
@@ -12,7 +13,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+ 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
 
       ),
       
-      home: HomeScreen(),
+      home: ExpedienteScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -3,14 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
-<<<<<<< HEAD
 import 'package:phisio_t/widgets/drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
-=======
-//import 'package:url_launcher/url_launcher.dart';
-
->>>>>>> e1831b233defc06251424640d7107a1373c4cd2b
 import '../utils/colores.dart';
+import 'expediente_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -25,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
 //Hm99618661
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
 
     double width = MediaQuery.of(context).size.width ;
     double height = MediaQuery.of(context).size.height;
@@ -51,129 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Text('Buscar Paciente: ', 
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800)
                   )
-=======
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 20,
-          backgroundColor: Colors.blue,
-          centerTitle: true,
-          title: const Text(
-            'Rehabilit',
-            style: TextStyle(fontWeight: FontWeight.w800),
-          ),
-        ),
-        drawer: Drawer(
-          elevation: 30,
-          child: Column(children: [
-            Container(
-                margin: EdgeInsets.only(top: height * 0.1, bottom: 10),
-                child: const Text('Rehabilit',
-                    style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.blue))),
-            Container(
-                margin: EdgeInsets.only(bottom: 40),
-                child: const Text('Cynthia Aranda Ramirez',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w200,
-                        color: Colors.black,
-                        fontFamily: 'GreatVibes'))),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Principal',
-                style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              leading: const Icon(Icons.home_filled),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Nuevo paciente (#1)',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RegistroScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Nuevo paciente (#2)',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Registro2Screen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                top: height * 0.4,
-              ),
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue)),
-                  onPressed: () {},
-                  child: const Text('Cerrar sesión')),
-            )
-          ]),
-        ),
-        body: ListView(
-          children: [
-            Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(
-                          top: height * 0.08, left: width * 0.05),
-                      child: const Text('Buscar Paciente: ',
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w800))),
-                  Container(
-                    margin: EdgeInsets.only(top: height * 0.085),
-                    child: inputField('', 300),
->>>>>>> e1831b233defc06251424640d7107a1373c4cd2b
                   ),
+                  Container(
+                    margin: EdgeInsets.only(top: height * 0.08),
+                    child: inputField('', 250),
+                    ),
                   Container(
                       margin: EdgeInsets.only(top: height * 0.085),
                       child: IconButton(
@@ -182,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             setState(() {
                               //Cuando se le da en el icono de buscar, se hace visible la lista maquetada
 
-<<<<<<< HEAD
                           visible = 'visible';
                         }); 
                       
@@ -199,25 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SizedBox(
                 height: height*0.6,
                 child: ListView(
-=======
-                              visible = 'visible';
-                            });
-                          });
-                        },
-                        icon: Icon(
-                          Icons.search_rounded,
-                          color: Colors.blue,
-                        ),
-                        iconSize: 50,
-                      ))
-                ],
-              ),
-              Visibility(
-                visible: visible == 'visible' ? true : false,
-                child: SizedBox(
-                  height: height * 0.6,
-                  child: ListView(
->>>>>>> e1831b233defc06251424640d7107a1373c4cd2b
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -272,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => RegistroScreen()));
+            context, MaterialPageRoute(builder: (context) => ExpedienteScreen()));
       },
       child: Container(
         margin: EdgeInsets.only(top: height * 0.08, right: 50),
@@ -340,7 +197,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              boton('Expediente', Colors.green, 60),
+              boton('Expediente', Colors.green, 60, (){
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+              }),
             ],
           ),
         ]),
@@ -348,9 +208,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-<<<<<<< HEAD
 
-  Widget boton(String label, Color color, double ancho){
+  Widget boton(String label, Color color, double ancho, Function() funcion){
   return Container(
     margin: EdgeInsets.only(top: 50),
     height: 50,
@@ -358,22 +217,8 @@ class _HomeScreenState extends State<HomeScreen> {
     child: ElevatedButton(
       child: 
       Text(label, style: const TextStyle(fontSize: 20),),
-      onPressed: (){},
+      onPressed: funcion,
       style: ButtonStyle(
-=======
-  Widget boton(String label, Color color, double ancho) {
-    return Container(
-        margin: EdgeInsets.only(top: 50),
-        height: 50,
-        width: 150,
-        child: ElevatedButton(
-          child: Text(
-            '${label}',
-            style: TextStyle(fontSize: 20),
-          ),
-          onPressed: () {},
-          style: ButtonStyle(
->>>>>>> e1831b233defc06251424640d7107a1373c4cd2b
             backgroundColor: MaterialStateProperty.all<Color>(color),
           ),
         ));

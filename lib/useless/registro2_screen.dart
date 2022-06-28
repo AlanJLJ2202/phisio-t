@@ -25,7 +25,6 @@ class _Registro2ScreenState extends State<Registro2Screen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-<<<<<<< HEAD:lib/useless/registro2_screen.dart
       appBar: AppBar(
         elevation: 20,
         backgroundColor: Colors.blueAccent,
@@ -42,116 +41,6 @@ class _Registro2ScreenState extends State<Registro2Screen> {
               height: height*0.55,
               width: 650,
               margin: EdgeInsets.only(top: height*0.02),
-=======
-        appBar: AppBar(
-          elevation: 20,
-          backgroundColor: Colors.blueAccent,
-          centerTitle: true,
-          title: const Text(
-            'Nuevo Paciente',
-            style: TextStyle(fontWeight: FontWeight.w800),
-          ),
-        ),
-        drawer: Drawer(
-          elevation: 30,
-          child: Column(children: [
-            Container(
-                margin: EdgeInsets.only(top: height * 0.1, bottom: 10),
-                child: const Text('Rehabilit',
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.blue))),
-            Container(
-                margin: EdgeInsets.only(bottom: 40),
-                child: const Text('Cynthia Aranda Ramirez',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w200,
-                        color: Colors.black,
-                        fontFamily: 'GreatVibes'))),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Principal',
-                style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              leading: const Icon(Icons.home_filled),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Nuevo paciente',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RegistroScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Nuevo diseño',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Registro2Screen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: height * 0.4),
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue)),
-                  onPressed: () {},
-                  child: const Text('Cerrar sesión')),
-            )
-          ]),
-        ),
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: height * 0.55,
-                width: 650,
-                margin: EdgeInsets.only(top: height * 0.02),
->>>>>>> e1831b233defc06251424640d7107a1373c4cd2b:lib/screens/registro2_screen.dart
 
                 //Solo decoracion, donde se le da color de fondo, sombra y tamaño
 

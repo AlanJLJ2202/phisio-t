@@ -25,7 +25,6 @@ class _RegistroScreenState extends State<RegistroScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-<<<<<<< HEAD
       appBar: AppBar(
         elevation: 20,
         backgroundColor: Colors.blueAccent,
@@ -41,115 +40,6 @@ class _RegistroScreenState extends State<RegistroScreen> {
               height: height*0.8,
               width: 450,
               margin: EdgeInsets.only(top: height*0.02),
-=======
-        appBar: AppBar(
-          elevation: 20,
-          backgroundColor: Colors.blueAccent,
-          centerTitle: true,
-          title: const Text(
-            'Nuevo Paciente',
-            style: TextStyle(fontWeight: FontWeight.w800),
-          ),
-        ),
-        drawer: Drawer(
-          elevation: 30,
-          child: Column(children: [
-            Container(
-                margin: EdgeInsets.only(top: height * 0.1, bottom: 10),
-                child: const Text('Rehabilit',
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.blue))),
-            Container(
-                margin: EdgeInsets.only(bottom: 40),
-                child: const Text('Cynthia Aranda Ramirez',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w200,
-                        color: Colors.black,
-                        fontFamily: 'GreatVibes'))),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Principal',
-                style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              leading: const Icon(Icons.home_filled),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Nuevo paciente',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RegistroScreen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text(
-                'Nuevo diseño',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              leading: const Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Registro2Screen()),
-                );
-              },
-            ),
-            Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: height * 0.4),
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue)),
-                  onPressed: () {},
-                  child: const Text('Cerrar sesión')),
-            )
-          ]),
-        ),
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                height: height * 0.8,
-                width: 450,
-                margin: EdgeInsets.only(top: height * 0.02),
->>>>>>> e1831b233defc06251424640d7107a1373c4cd2b
 
                 //Solo decoracion, donde se le da color de fondo, sombra y tamaño
 
@@ -173,7 +63,6 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
                 //Esto es lo que lleva dentro el contenedor primario
 
-<<<<<<< HEAD
                 child: Column(
                     children: [
                       Container(
@@ -195,10 +84,6 @@ class _RegistroScreenState extends State<RegistroScreen> {
                                 margin: EdgeInsets.only(top: 15, left: 10),
                                 child: inputField('Fecha de nacimiento', 230)
                               ),
-                              //Container(
-                              //margin: EdgeInsets.only(top: 15, left: 10),
-                              //child: inputDate(txtFecha, 'date', context, txtFecha.text)
-                              //),
                           ],
                         ),
                         Container(
@@ -226,66 +111,8 @@ class _RegistroScreenState extends State<RegistroScreen> {
                           ],
                      ),
                   ]
-=======
-                child: Column(children: [
-                  Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      child: inputField('Nombre(s)', 350)),
-                  /*Container(
-                          margin: const EdgeInsets.only(top: 15),
-                          child: const Text('Apellidos', style: TextStyle(fontWeight: FontWeight.w600))),*/
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              margin: const EdgeInsets.only(right: 20),
-                              child: inputField('Paterno', 150)),
-                          Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              child: inputField('Materno', 150))
-                        ]),
->>>>>>> e1831b233defc06251424640d7107a1373c4cd2b
                   ),
-                  Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: inputField('Telefono', 350)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(top: 10, right: 10),
-                          child: inputField('Edad', 75)),
-                      Container(
-                          margin: EdgeInsets.only(top: 10, left: 10),
-                          child: inputDate(
-                              txtFecha, 'date', context, txtFecha.text)),
-                    ],
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: inputField('Dirección', 350)),
-                  Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: inputField('Ocupación', 350)),
-                  Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: inputField('Enfermedad cronica', 350)),
-                  checkRow(width),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: boton('Guardar', Colors.green, height)),
-                      Container(
-                          margin: EdgeInsets.only(left: 10),
-                          child: boton('Cancelar', Colors.red, height))
-                    ],
-                  ),
-                ]),
-              ),
+              )
             ],
           ),
         ),

@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
+import '../screens/expediente_screen.dart';
 import '../screens/home_screen.dart';
 import '../useless/registro2_screen.dart';
 import '../screens/registro_screen.dart';
@@ -61,7 +62,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             ListTile(
               title: const Text('Nuevo paciente (#1)', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: const Icon(Icons.personal_injury_outlined),
+              leading: Icon(Icons.personal_injury_outlined),
               iconColor: Colors.blue,
               onTap: () {
                 Navigator.pop(context);
@@ -83,7 +84,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 Navigator.pop(context);
                  Navigator.push(
                   context,
-                   MaterialPageRoute(builder: (context) => Registro2Screen()),
+                   MaterialPageRoute(builder: (context) => ExpedienteScreen()),
                 );
               },
             ),
