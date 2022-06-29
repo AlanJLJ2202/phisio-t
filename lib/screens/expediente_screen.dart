@@ -18,12 +18,17 @@ class ExpedienteScreen extends StatefulWidget{
 
 class _HomeScreenState extends State<ExpedienteScreen> {
 
+  double _currentSliderValue = 0;
+
+
   @override
   Widget build(BuildContext context) {
 
     double width = MediaQuery. of(context).size.width ;
     double height = MediaQuery. of(context).size.height;
     
+    final TextEditingController _descripcion = TextEditingController();
+
 
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +48,6 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                     margin: EdgeInsets.only(top: height*0.05),
                     height: height * 0.08,
                     width: width*0.3,
-                    
                     decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.blue, width: 4),
@@ -115,6 +119,13 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.blue)
                               ),
+                              child: TextField(
+                                controller:  _descripcion,
+                                keyboardType: TextInputType.multiline,
+                                minLines: null,
+                                maxLines: null,
+                                expands: true, 
+                              ),
                             )
                           ]),
                         ),
@@ -123,7 +134,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                           width: 400,
                           child: Column(children: [
 
-                            Text('Signos vitales',
+                            const Text('Signos vitales',
                               style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
@@ -135,34 +146,87 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                               width: 350,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.blue)
-                              ), 
+                              ),
+                              child: Column(children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 23),
+                                  height: 40,
+                                  width: 200,
+                                  //color: Colors.green,
+                                  child: const TextField(
+                                    
+                                    decoration: InputDecoration(  
+                                    labelText: 'Presión arterial',
+                                    //hintStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
+                                    labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
+                                    //fillColor: Colors.amber,
+                                    contentPadding: EdgeInsets.only(left: 10),
+                                  ),  
+
+                                  )
+                                ),
+                                 Container(
+                                  margin: EdgeInsets.only(top: 15),
+                                  height: 40,
+                                  width: 200,
+                                  child: const TextField(
+                                    decoration: InputDecoration(  
+                                    labelText: 'Respiracion',    
+                                  ),  
+
+                                  )
+                                ),
+                                 Container(
+                                  margin: EdgeInsets.only(top: 15),
+                                  height: 40,
+                                  width: 200,
+                                  child: const TextField(
+                                    decoration: InputDecoration(  
+                                    labelText: 'Pulso',    
+                                  ),  
+
+                                  )
+                                ),
+                                
+                              ]), 
                             ),
 
 
-                            Text('Nivel de inflamacion o edema',
+                            const Text('Nivel de inflamación o Edema',
                               style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize:20
                             ),),
                             Container(
-                               margin: EdgeInsets.only(top: 15, bottom: 15),
+                              margin: EdgeInsets.only(top: 15, bottom: 15),
                               height: 150,
                               width: 350,
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.blue)
-                            ))
-
-                          ]),
-                        )
-                      ]),
-                    ),
-                  ), 
-            ]),
-          ),
-        ],
-      )
-    );
-  }
-
-}
+                                border: Border.all(color: Colors.blue),
+                             
+                            ),
+                            child: Slider(
+                              value: _currentSliderValue,
+                              max: 100,
+                              divisions: 10,
+                              activeColor: Colors.red,
+                              inactiveColor: Colors.green,
+                              label: _currentSliderValue.round().toString(),
+                              onChanged: (double value) {
+                                  setState(() {
+                                    _currentSliderValue = value;
+                                  });
+                                },
+),
+),
+]),
+)]
+),
+),
+),
+]),
+),
+],
+));
+}}
