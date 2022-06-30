@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:phisio_t/useless/registro2_screen.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import '../widgets/drawer.dart';
 import '../widgets/navigationbar_widget.dart';
 import 'home_screen.dart';
+
 
 class RegistroScreen extends StatefulWidget {
   @override
@@ -17,7 +22,14 @@ class _RegistroScreenState extends State<RegistroScreen> {
   bool isCheckedA = false;
   bool isCheckedP = false;
 
-  final TextEditingController txtFecha = TextEditingController();
+  final TextEditingController txtNombre = TextEditingController();
+  final TextEditingController txtTelefono = TextEditingController();
+  final TextEditingController txtEdad = TextEditingController();
+  final TextEditingController txtFechaN = TextEditingController();
+  final TextEditingController txtOcupacion = TextEditingController();
+  final TextEditingController txtDireccion = TextEditingController();
+  final TextEditingController txtEnfermedad = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,36 +79,36 @@ class _RegistroScreenState extends State<RegistroScreen> {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 35),
-                        child: inputField('Nombre Completo', 350)
+                        child: inputField('Nombre Completo', 350, txtNombre)
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Telefono', 350)
+                          child: inputField('Telefono', 350, txtTelefono)
                           ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
                               margin: EdgeInsets.only(top: 15, right: 30),
-                              child: inputField('Edad', 75)
+                              child: inputField('Edad', 75, txtEdad)
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15, left: 10),
-                                child: inputField('Fecha de nacimiento', 230)
+                                child: inputField('Fecha de nacimiento', 230, txtFechaN)
                               ),
                           ],
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Dirección', 350)
+                          child: inputField('Dirección', 350, txtDireccion)
                         ),
                          Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Ocupación', 350)
+                          child: inputField('Ocupación', 350, txtOcupacion)
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Enfermedad cronica', 350)
+                          child: inputField('Enfermedad cronica', 350, txtEnfermedad)
                           ),
                         checkRow(width),
                          Row(
@@ -104,10 +116,10 @@ class _RegistroScreenState extends State<RegistroScreen> {
                           children: [
                             Container(
                               margin: EdgeInsets.only(right: 10),
-                              child: boton('Guardar', Colors.green, height)),
+                              child: boton('Guardar', Colors.green, height, () => register())),
                             Container(
                               margin: EdgeInsets.only(left: 10),
-                              child: boton('Cancelar', Colors.red, height))
+                              child: boton('Cancelar', Colors.red, height, (){}))
                           ],
                      ),
                   ]
@@ -152,14 +164,14 @@ class _RegistroScreenState extends State<RegistroScreen> {
       _selectedDate = newSelectedDate;
       setState(() {
         var fecha_publicacion = DateFormat("yyyy-MM-dd").format(_selectedDate!);
-        txtFecha.text = fecha_publicacion;
+        txtFechaN.text = fecha_publicacion;
       });
     }
   }
 
 //Componentes personalizados por nosotros que reciben parametros dinamicos
 
-  Widget inputField(String label, double largo) {
+  Widget inputField(String label, double largo, TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -176,7 +188,8 @@ class _RegistroScreenState extends State<RegistroScreen> {
               Radius.circular(14),
             ),
           ),
-          child: const TextField(
+          child: TextField(
+            controller: controller,
             textAlign: TextAlign.center,
           ),
         ),
@@ -311,18 +324,66 @@ class _RegistroScreenState extends State<RegistroScreen> {
     );
   }
 
-  Widget boton(String label, Color color, double ancho) {
+  Widget boton(String label, Color color, double ancho, Function() funcion) {
     return Container(
         margin: EdgeInsets.only(top: 15),
         height: 38,
         width: 100,
         child: ElevatedButton(
           child: Text('${label}'),
-          onPressed: () {},
+          onPressed: funcion,
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(color),
           ),
         ));
+  }
+
+  void getHttp() async {
+  try {
+    var response = await Dio().get('http://www.google.com');
+    print(response);
+  } catch (e) {
+    print(e);
+  }
+}
+
+  Future register() async {
+
+    //String url = Uri.parse("https://phisiot.000webhostapp.com/registro.php");
+
+    var response = await Dio().post(
+    "https://phisiot.000webhostapp.com/registro.php", 
+    data: {
+      "nombre": txtNombre.text,
+      "telefono": txtTelefono.text,
+      "edad": txtEdad.text,
+      "fecha_nacimiento": txtFechaN.text,
+      "ocupacion": txtOcupacion.text,
+      "direccion": txtDireccion.text,
+    },
+    
+    );
+
+    print('${response.data}');
+
+
+Future.delayed(const Duration(seconds: 1), () {
+  //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(),),);
+   Fluttertoast.showToast(
+          msg: "Revisa la consola"
+      );
+});
+    //var data = json.decode(response.body);
+    //if (data == "Success") {
+      //correo.clear();
+      //contrasena.clear();
+     
+    //} else {
+      //Fluttertoast.showToast(
+        //  msg: "Registro incorrecto"
+      //);
+
+    //}
   }
 }
 
@@ -344,3 +405,5 @@ const Map<TabItem, MaterialColor> activeTabColor = {
   TabItem.Expediente: Colors.lightBlue,
   TabItem.Agenda: Colors.lightBlue,
 };
+
+

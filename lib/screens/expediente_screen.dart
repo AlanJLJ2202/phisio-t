@@ -171,7 +171,9 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                   width: 200,
                                   child: const TextField(
                                     decoration: InputDecoration(  
-                                    labelText: 'Respiracion',    
+                                    labelText: 'Respiracion',
+                                    labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
+    
                                   ),  
 
                                   )
@@ -182,7 +184,8 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                   width: 200,
                                   child: const TextField(
                                     decoration: InputDecoration(  
-                                    labelText: 'Pulso',    
+                                    labelText: 'Pulso',
+                                    labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900)    
                                   ),  
 
                                   )
@@ -229,4 +232,10 @@ class _HomeScreenState extends State<ExpedienteScreen> {
 ),
 ],
 ));
-}}
+
+}
+
+
+  
+}
+
