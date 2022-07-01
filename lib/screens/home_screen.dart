@@ -14,43 +14,43 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String visible = "falso";
+  String visible = "visible";
   Uri myUri = Uri.parse(
       "https://wa.me/+524761364798?text=Prueba%20envio%20de%20mensaje%20de%20la%20app%20a%20Whatsapp");
 
 //Hm99618661
   @override
   Widget build(BuildContext context) {
-
-    double width = MediaQuery.of(context).size.width ;
+    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 20,
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-        title: const Text('Rehabilit - Fisioterapia Integral y Deporte', style: TextStyle(fontWeight: FontWeight.w800),),
-      ),
-      drawer: DrawerWidget(height),
-      body: ListView(
-        children: [
-          Column(
-            children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: height*0.08, left: width*0.05),
-                  child: const Text('Buscar Paciente: ', 
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800)
-                  )
-                  ),
+        appBar: AppBar(
+          elevation: 20,
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+          title: const Text(
+            'Rehabilit - Fisioterapia Integral y Deporte',
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ),
+        ),
+        drawer: DrawerWidget(height),
+        body: ListView(
+          children: [
+            Column(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(
+                          top: height * 0.08, left: width * 0.05),
+                      child: const Text('Buscar Paciente: ',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.w800))),
                   Container(
                     margin: EdgeInsets.only(top: height * 0.08),
                     child: inputField('', 250),
-                    ),
+                  ),
                   Container(
                       margin: EdgeInsets.only(top: height * 0.085),
                       child: IconButton(
@@ -59,22 +59,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             setState(() {
                               //Cuando se le da en el icono de buscar, se hace visible la lista maquetada
 
-                          visible = 'visible';
-                        }); 
-                      
-                        });
-                              
-                      }, 
-                      icon: Icon(Icons.search_rounded, color: Colors.blue,),
-                      iconSize: 50,
-                ))
-              ],
-            ),
-            Visibility(
-              visible: visible == 'visible' ? true : false,
-              child: SizedBox(
-                height: height*0.6,
-                child: ListView(
+                              visible = 'visible';
+                            });
+                          });
+                        },
+                        icon: Icon(
+                          Icons.search_rounded,
+                          color: Colors.blue,
+                        ),
+                        iconSize: 50,
+                      ))
+                ],
+              ),
+              Visibility(
+                visible: visible == 'visible' ? true : false,
+                child: SizedBox(
+                  height: height * 0.6,
+                  child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -128,8 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
       String telefono, String ubicacion) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ExpedienteScreen()));
       },
       child: Container(
         margin: EdgeInsets.only(top: height * 0.08, right: 50),
@@ -197,9 +198,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              boton('Expediente', Colors.green, 60, (){
+              boton('Expediente', Colors.green, 60, () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ExpedienteScreen()));
               }),
             ],
           ),
@@ -208,17 +211,18 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
-  Widget boton(String label, Color color, double ancho, Function() funcion){
-  return Container(
-    margin: EdgeInsets.only(top: 50),
-    height: 50,
-    width: 150,
-    child: ElevatedButton(
-      child: 
-      Text(label, style: const TextStyle(fontSize: 20),),
-      onPressed: funcion,
-      style: ButtonStyle(
+  Widget boton(String label, Color color, double ancho, Function() funcion) {
+    return Container(
+        margin: EdgeInsets.only(top: 50),
+        height: 50,
+        width: 150,
+        child: ElevatedButton(
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 20),
+          ),
+          onPressed: funcion,
+          style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(color),
           ),
         ));

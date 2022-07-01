@@ -13,30 +13,21 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
- 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       scrollBehavior: CustomScrollBehavior(),
       title: 'Fisioterapeuta',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colores.celeste,
-        textTheme: Theme.of(context).textTheme.apply(
-              fontFamily: "Raleway",
-              //bodyColor: Colors.white,
-              //displayColor: Colors.black
-              
-            )
-
-      ),
-      
-      home: ExpedienteScreen(),
+          primarySwatch: Colors.blue,
+          primaryColor: Colores.celeste,
+          textTheme: Theme.of(context).textTheme.apply(
+                fontFamily: "Raleway",
+                //bodyColor: Colors.white,
+                //displayColor: Colors.black
+              )),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
-
-
-
