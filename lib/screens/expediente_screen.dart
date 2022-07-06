@@ -96,27 +96,6 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                           ]),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 50),
-                                child:
-                                    boton('Guardar', Colors.green, 13, () {}),
-                              ),
-                              Container(
-                                  //alignment: Alignment.centerRight,
-                                  margin: EdgeInsets.only(
-                                      bottom: 30, top: 15, left: 700),
-                                  child: const Text(
-                                    '2022/06/30',
-                                    style: TextStyle(
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 20),
-                                  )),
-                            ],
-                          ),
                           Container(
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -125,98 +104,147 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                     height: 500,
                                     width: 400,
                                     child: Column(children: [
-                                      const Text(
-                                        'Preguntas frecuentes',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 20),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 15),
-                                        height: 450,
-                                        width: 400,
-                                        decoration: BoxDecoration(
-                                            border:
-                                                Border.all(color: Colors.blue)),
-                                        child: TextField(
-                                          controller: _descripcion,
-                                          keyboardType: TextInputType.multiline,
-                                          minLines: null,
-                                          maxLines: null,
-                                          expands: true,
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            alignment: Alignment.centerLeft,
+                                            margin: EdgeInsets.only(top: 10),
+                                            child: Text(
+                                              '2022/06/30',
+                                              style: TextStyle(
+                                                  color: Colors.blue,
+                                                  fontWeight: FontWeight.w800,
+                                                  fontSize: 20),
+                                            ),
+                                          )),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          margin: EdgeInsets.only(top: 10),
+                                          child: Text(
+                                            'Preguntas frecuentes',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 20),
+                                          ),
                                         ),
-                                      )
+                                      ),
+                                      Expanded(
+                                        flex: 11,
+                                        child: Container(
+                                          margin: EdgeInsets.only(top: 15),
+                                          height: height*0.55,
+                                          width: 400,
+                                          decoration: BoxDecoration(
+                                              border:
+                                                  Border.all(color: Colors.blue)),
+                                          child: TextField(
+                                            controller: _descripcion,
+                                            keyboardType: TextInputType.multiline,
+                                            minLines: null,
+                                            maxLines: null,
+                                            expands: true,
+                                          ),
+                                        ),
+                                      ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              //margin: EdgeInsets.only(left: 50, right: 500),
+                                              child: boton('Guardar', Colors.green, 13, () {})
+
+                                      ),
+                                        ),
                                     ]),
                                   ),
                                   Container(
                                     height: 500,
                                     width: 400,
-                                    //color: Colors.green,
+
                                     child: Column(children: [
-                                      const Text(
-                                        'Signos vitales',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 20),
+                                      Expanded(
+                                        child: Container(
+                                          margin: EdgeInsets.only(top: 40),
+                                          child: Text(
+                                            'Signos vitales',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 20),
+                                          ),
+                                        ),
                                       ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: 15, bottom: 10),
-                                        height: 200,
-                                        width: 350,
-                                        decoration: BoxDecoration(
-                                            border:
-                                                Border.all(color: Colors.blue)),
-                                        child: Column(children: [
-                                          Container(
-                                              margin: EdgeInsets.only(top: 23),
-                                              height: 40,
-                                              width: 200,
-                                              //color: Colors.green,
-                                              child: const TextField(
-                                                decoration: InputDecoration(
-                                                  labelText: 'Presión arterial',
-                                                  labelStyle: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontWeight:
-                                                          FontWeight.w900),
-                                                  contentPadding:
-                                                      EdgeInsets.only(left: 10),
-                                                ),
-                                              )),
-                                          Container(
-                                              margin: EdgeInsets.only(top: 15),
-                                              height: 40,
-                                              width: 200,
-                                              child: const TextField(
-                                                decoration: InputDecoration(
-                                                  labelText: 'Respiracion',
-                                                  labelStyle: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontWeight:
-                                                          FontWeight.w900),
-                                                  contentPadding:
-                                                      EdgeInsets.only(left: 10),
-                                                ),
-                                              )),
-                                          Container(
-                                              margin: EdgeInsets.only(top: 15),
-                                              height: 40,
-                                              width: 200,
-                                              child: const TextField(
-                                                decoration: InputDecoration(
-                                                  labelText: 'Pulso',
-                                                  labelStyle: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontWeight:
-                                                          FontWeight.w900),
-                                                  contentPadding:
-                                                      EdgeInsets.only(left: 10),
-                                                ),
-                                              )),
-                                        ]),
+                                      Expanded(
+                                        flex: 3,
+                                        child: Container(
+                                          padding: EdgeInsets.only(bottom: 15),
+                                          margin: EdgeInsets.only(
+                                              top: 15, bottom: 10),
+                                          height: 200,
+                                          width: 350,
+                                          decoration: BoxDecoration(
+                                              border:
+                                                  Border.all(color: Colors.blue)),
+                                          child: Column(
+
+                                              children: [
+
+                                            Expanded(
+                                              child: Container(
+                                                  margin: EdgeInsets.only(top: 23),
+                                                  height: 40,
+                                                  width: 200,
+                                                  //color: Colors.green,
+                                                  child: const TextField(
+                                                    decoration: InputDecoration(
+                                                      labelText: 'Presión arterial',
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.blue,
+                                                          fontWeight:
+                                                              FontWeight.w900),
+                                                      contentPadding:
+                                                          EdgeInsets.only(left: 10),
+                                                    ),
+                                                  )),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                  margin: EdgeInsets.only(top: 15),
+                                                  height: 40,
+                                                  width: 200,
+                                                  child: const TextField(
+                                                    decoration: InputDecoration(
+                                                      labelText: 'Respiracion',
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.blue,
+                                                          fontWeight:
+                                                              FontWeight.w900),
+                                                      contentPadding:
+                                                          EdgeInsets.only(left: 10),
+                                                    ),
+                                                  )),
+                                            ),
+                                            Expanded(
+                                              //flex: 2,
+                                              child: Container(
+                                                  margin: EdgeInsets.only(top: 15),
+                                                  height: 40,
+                                                  width: 200,
+                                                  child: const TextField(
+                                                    decoration: InputDecoration(
+                                                      labelText: 'Pulso',
+                                                      labelStyle: TextStyle(
+                                                          color: Colors.blue,
+                                                          fontWeight:
+                                                              FontWeight.w900),
+                                                      contentPadding:
+                                                          EdgeInsets.only(left: 10),
+                                                    ),
+                                                  )),
+                                            ),
+                                          ]),
+                                        ),
                                       ),
                                       const Text(
                                         'Nivel de Dolor',
