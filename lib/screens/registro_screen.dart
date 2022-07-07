@@ -37,7 +37,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
         elevation: 20,
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
-        title: const Text('Nuevo Paciente - height: ${height}, width: ${width}', style: TextStyle(fontWeight: FontWeight.w800),),
+        title: Text('Nuevo Paciente - ID: ${height.round()}, ${width.round()}', style: TextStyle(fontWeight: FontWeight.w800),),
       ),
       drawer: DrawerWidget(height),
       body: Center(

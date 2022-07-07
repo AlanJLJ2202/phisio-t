@@ -15,8 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String visible = "visible";
-  Uri myUri = Uri.parse(
-      "https://wa.me/+524761364798?text=Prueba%20envio%20de%20mensaje%20de%20la%20app%20a%20Whatsapp");
+  Uri myUri = Uri.parse("https://wa.me/+524761364798?text=Prueba%20envio%20de%20mensaje%20de%20la%20app%20a%20Whatsapp");
 
 //Hm99618661
   @override
