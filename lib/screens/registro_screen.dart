@@ -37,7 +37,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
         elevation: 20,
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
-        title: const Text('Nuevo Paciente', style: TextStyle(fontWeight: FontWeight.w800),),
+        title: const Text('Nuevo Paciente - height: ${height}, width: ${width}', style: TextStyle(fontWeight: FontWeight.w800),),
       ),
       drawer: DrawerWidget(height),
       body: Center(
@@ -48,6 +48,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
               height: 600,
               width: 450,
               margin: EdgeInsets.only(top: height*0.02),
+
 
                 //Solo decoracion, donde se le da color de fondo, sombra y tamaño
 
