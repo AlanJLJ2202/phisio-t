@@ -24,84 +24,107 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     
     return Drawer(
         elevation: 30,
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: widget.height*0.1, bottom: 10),
-              child: const Text('Rehabilit', 
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900, color: Colors.blue)
-              )
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 40),
-              child: const Text('Cynthia Aranda Ramirez', 
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Colors.black, fontFamily: 'GreatVibes')
-              )
-            ),
-            const Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Principal', 
-              style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-              leading: const Icon(Icons.home_filled),
-              iconColor: Colors.blue,
-              onTap: () {
-                 Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-            ),
-            const Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Nuevo paciente (#1)', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: Icon(Icons.personal_injury_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => RegistroScreen()),
-                );
-              },
-            ),
-            const Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            ListTile(
-              title: const Text('Expedientes', style: TextStyle(fontWeight: FontWeight.bold),),
-              leading: const Icon(Icons.folder_shared_outlined),
-              iconColor: Colors.blue,
-              onTap: () {
-                Navigator.pop(context);
-                 Navigator.push(
-                  context,
-                   MaterialPageRoute(builder: (context) => ExpedienteScreen()),
-                );
-              },
-            ),
-            const Divider(
-              height: 1,
-              color: Colors.blue,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: widget.height*0.4,),
-              child: ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color> (Colors.blue)),
-                onPressed: (){ 
-                }, 
-                child: const Text('Cerrar sesión')
-                ),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              colors: [
+                Colors.white,
+                Colors.white,
+                Colors.white,
+                Colors.white,
+                Colors.white,
+                Colors.blue.shade100,
+                Colors.blue.shade200,
+                Colors.blue,
+              ]
             )
-        ]
+          ),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: widget.height*0.1, bottom: 10),
+                child: const Text('Rehabilit',
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: Colors.blue)
+                )
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 40),
+                child: const Text('Cynthia Aranda Ramirez',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w200, color: Colors.black, fontFamily: 'GreatVibes')
+                )
+              ),
+              const Divider(
+                height: 1,
+                color: Colors.blue,
+              ),
+              ListTile(
+                title: const Text('Principal',
+                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+                ),
+                leading: const Icon(Icons.home_filled),
+                iconColor: Colors.blue,
+                onTap: () {
+                   Navigator.pop(context);
+                   Navigator.push(
+                    context,
+                     MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                },
+              ),
+              const Divider(
+                height: 1,
+                color: Colors.blue,
+              ),
+              ListTile(
+                title: const Text('Nuevo paciente', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
+                leading: Icon(Icons.personal_injury_outlined),
+                iconColor: Colors.blue,
+                onTap: () {
+                  Navigator.pop(context);
+                   Navigator.push(
+                    context,
+                     MaterialPageRoute(builder: (context) => RegistroScreen()),
+                  );
+                },
+              ),
+              const Divider(
+                height: 1,
+                color: Colors.blue,
+              ),
+              ListTile(
+                title: const Text('Expedientes', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
+                leading: const Icon(Icons.folder_shared_outlined),
+                iconColor: Colors.blue,
+                onTap: () {
+                  Navigator.pop(context);
+                   Navigator.push(
+                    context,
+                     MaterialPageRoute(builder: (context) => ExpedienteScreen()),
+                  );
+                },
+              ),
+              const Divider(
+                height: 1,
+                color: Colors.blue,
+              ),
+              Container(
+                margin: EdgeInsets.only(top: widget.height*0.4),
+                width: 75,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color> (Colors.red),
+                      elevation: MaterialStateProperty.all(25),
+                      //shadowColor: MaterialStateProperty.all<Color> (Colors.blue)
+                  ),
+                  onPressed: (){
+                  },
+                  child: Icon(Icons.highlight_off_rounded)
+                  ),
+              )
+          ]
+          ),
         ),
       );
   }

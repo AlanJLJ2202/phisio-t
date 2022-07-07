@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: height * 0.08, left: width * 0.05),
                       child: const Text('Buscar Paciente: ',
                           style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w800))),
+                              fontSize: 25, fontWeight: FontWeight.w900))),
                   Container(
                     margin: EdgeInsets.only(top: height * 0.08),
                     child: inputField('', 250),
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Visibility(
                 visible: visible == 'visible' ? true : false,
                 child: SizedBox(
-                  height: height * 0.6,
+                  height: 430,
                   child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
@@ -119,6 +119,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: const TextField(
             textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(bottom: 15)
+            ),
           ),
         ),
       ],
@@ -134,20 +138,35 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Container(
         margin: EdgeInsets.only(top: height * 0.08, right: 50),
-        height: height * 0.5,
+        //height: 700,
         width: 570,
         decoration: BoxDecoration(
-          color: Colors.transparent.withOpacity(0.01),
+          //color: Colors.transparent,
           border: Border.all(color: Colors.blue, width: 4),
           borderRadius: const BorderRadius.all(
             Radius.circular(25),
           ),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.blue.shade100,
+              Colors.blue.shade200,
+              Colors.blue.shade300,
+              Colors.blue,
+            ],
+          )
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
             margin: EdgeInsets.only(top: 30, left: 30),
             child: Text(nombre,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 35,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold)),
@@ -164,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 margin: EdgeInsets.only(top: 30, left: 30),
                 child: IconButton(
                   iconSize: 40,
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.whatsapp_outlined,
                     color: Colors.green,
                   ),
@@ -173,10 +192,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 30, left: 5, right: 15),
+                margin: const EdgeInsets.only(top: 30, left: 5, right: 15),
                 child: Text('${telefono}',
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
               ),
             ],
           ),
@@ -188,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Icon(Icons.location_pin, color: Colors.red, size: 40),
               ),
               Container(
-                margin: EdgeInsets.only(top: 30, left: 5, right: 15),
+                margin: EdgeInsets.only(top: 15, left: 5, right: 15),
                 child: Text('${ubicacion}',
                     style:
                         TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
@@ -201,8 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
               boton('Expediente', Colors.green, 60, () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => ExpedienteScreen()));
+                    MaterialPageRoute(builder: (context) => ExpedienteScreen()));
               }),
             ],
           ),
@@ -213,10 +230,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget boton(String label, Color color, double ancho, Function() funcion) {
     return Container(
-        margin: EdgeInsets.only(top: 50),
+        margin: EdgeInsets.only(top: 30),
         height: 50,
         width: 150,
         child: ElevatedButton(
+
           child: Text(
             label,
             style: const TextStyle(fontSize: 20),
@@ -224,6 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: funcion,
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(color),
+            elevation: MaterialStateProperty.all(25)
           ),
         ));
   }

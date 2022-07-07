@@ -1,14 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:phisio_t/useless/registro2_screen.dart';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import '../widgets/drawer.dart';
-import '../widgets/navigationbar_widget.dart';
-import 'home_screen.dart';
+
 
 
 class RegistroScreen extends StatefulWidget {
@@ -17,6 +12,7 @@ class RegistroScreen extends StatefulWidget {
 }
 
 class _RegistroScreenState extends State<RegistroScreen> {
+
   bool isCheckedH = false;
   bool isCheckedD = false;
   bool isCheckedA = false;
@@ -49,7 +45,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Container(
-              height: height*0.8,
+              height: 600,
               width: 450,
               margin: EdgeInsets.only(top: height*0.02),
 
@@ -128,8 +124,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
             ],
           ),
         ),
-        bottomNavigationBar:
-            BottomNavigation(currentTab: _currentTab, onSelectTab: _selectTab));
+    );  //bottomNavigationBar: BottomNavigation(currentTab: _currentTab, onSelectTab: _selectTab));
   }
 
 //En esta parte se crean las funciones y los metodos dentro del contexto de la clase
@@ -177,7 +172,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
       children: [
         Container(
             margin: EdgeInsets.only(left: 10),
-            child: Text(label, style: TextStyle(fontWeight: FontWeight.w900))),
+            child: Text(label, style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: Colors.blue))),
         Container(
           height: 35,
           width: largo,
@@ -191,6 +186,14 @@ class _RegistroScreenState extends State<RegistroScreen> {
           child: TextField(
             controller: controller,
             textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: Colors.black
+            ),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(bottom: 10)
+            ),
           ),
         ),
       ],
