@@ -312,7 +312,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
         Container(
           width: 350 / 4,
           child: Column(children: [
-            Text('E. Pulmonar', style: TextStyle(fontWeight: FontWeight.w600)),
+            Text('E. Pulmonarr', style: TextStyle(fontWeight: FontWeight.w600)),
             Checkbox(
               fillColor: MaterialStateProperty.all(Colors.blue),
               value: isCheckedP,
@@ -356,7 +356,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
     //String url = Uri.parse("https://phisiot.000webhostapp.com/registro.php");
 
     var response = await Dio().post(
-    "https://phisiot.000webhostapp.com/registro.php", 
+    "https://www.phisio-t.com/registro_paciente.php", 
     data: {
       "nombre": txtNombre.text,
       "telefono": txtTelefono.text,
