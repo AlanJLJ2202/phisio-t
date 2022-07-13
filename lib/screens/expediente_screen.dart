@@ -31,7 +31,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
           backgroundColor: Colors.blue,
           centerTitle: true,
           title: const Text(
-            'Expediente',
+            'Expediente / 2022-07-12',
             style: TextStyle(fontWeight: FontWeight.w800),
           ),
         ),
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                           )),
                         ),
                         Container(
-                          height: 500,
+                          height: 475,
                           width: 850,
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -111,9 +111,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
 
 
                           ),
-                          child: Column(
-                            children: [
-                              Container(
+                          child: Container(
                                 child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -121,11 +119,11 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                         height: 500,
                                         width: 400,
                                         child: Column(children: [
-                                          Expanded(
+                                          /*Expanded(
                                               flex: 1,
                                               child: Container(
-                                                alignment: Alignment.centerLeft,
-                                                margin: EdgeInsets.only(top: 10),
+                                                                                            alignment: Alignment.centerLeft,
+                                                margin: EdgeInsets.only(top: 10, left: 10),
                                                 child: Text(
                                                   '2022/06/30',
                                                   style: TextStyle(
@@ -133,12 +131,10 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                       fontWeight: FontWeight.w800,
                                                       fontSize: 20),
                                                 ),
-                                              )),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Container(
-                                              margin: EdgeInsets.only(top: 10),
-                                              child: Text(
+                                              )),*/
+                                          Container(
+                                              margin: EdgeInsets.only(top: 15),
+                                              child: const Text(
                                                 'Descripcion',
                                                 style: TextStyle(
                                                     color: Colors.black,
@@ -146,12 +142,10 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                     fontSize: 20),
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 11,
-                                            child: Container(
-                                              margin: EdgeInsets.only(top: 15, left: width*0.01),
-                                              height: 500,
+
+                                          Container(
+                                              margin: EdgeInsets.only(top: 15, left: width*0.01, bottom: 5),
+                                              height: 330,
                                               width: 400,
                                               decoration: BoxDecoration(
                                                   border: Border.all(color: Colors.blue)),
@@ -167,15 +161,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                 style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
                                               ),
                                             ),
-                                          ),
-                                            Expanded(
-                                              flex: 2,
-                                              child: Container(
-                                                  margin: EdgeInsets.only(top: 10),
-                                                  child: boton('Guardar', Colors.green, 13, () {})
-
-                                          ),
-                                            ),
+                                           boton('Guardar', Colors.green, 13, () {})
                                         ]),
                                       ),
                                       Container(
@@ -183,123 +169,111 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                         width: 400,
 
                                         child: Column(children: [
-                                          Expanded(child: Container()),
-                                          Expanded(
-                                            flex:4,
-                                            child: Container(
-                                              margin: const EdgeInsets.only(top: 34),
-                                              child: const Text(
-                                                'Signos vitales',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w900,
-                                                    fontSize: 20),
-                                              ),
+
+                                          Container(
+                                            margin: const EdgeInsets.only(top: 15),
+                                            child: const Text(
+                                              'Signos vitales',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 20),
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: 12,
-                                            child: Container(
-                                              padding: EdgeInsets.only(bottom: 15),
-                                              margin: EdgeInsets.only(top: 15, bottom: 10),
-                                              height: 200,
-                                              width: 350,
-                                              decoration: BoxDecoration(
-                                                  border:
-                                                      Border.all(color: Colors.blue)),
-                                              child: Column(
+                                          Container(
+                                            padding: EdgeInsets.only(bottom: 15),
+                                            margin: EdgeInsets.only(top: 15, bottom: 10),
+                                            height: 150,
+                                            width: 350,
+                                            decoration: BoxDecoration(
+                                                border:
+                                                    Border.all(color: Colors.blue)),
+                                            child: Column(
 
-                                                  children: [
+                                                children: [
 
-                                                Container(
-                                                      margin: EdgeInsets.only(top: 1),
+                                              Container(
+                                                    margin: EdgeInsets.only(top: 1),
+                                                    height: 40,
+                                                    width: 200,
+
+                                                    //color: Colors.green,
+                                                    child: const TextField(
+                                                      //scrollPadding: EdgeInsets.only(bottom: 10),
+                                                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
+                                                      decoration: InputDecoration(
+                                                        labelText: 'TA',
+                                                        floatingLabelAlignment: FloatingLabelAlignment.center,
+                                                        labelStyle: TextStyle(
+                                                            color: Colors.blue,
+                                                            fontWeight: FontWeight.w900),
+                                                        contentPadding: EdgeInsets.only(left: 10, bottom: 10),
+                                                        //contentPadding: EdgeInsets.all(5)
+                                                      ),
+                                                    )),
+
+                                              Container(
+                                                   margin: EdgeInsets.only(top: 1),
+                                                    height: 40,
+                                                    width: 200,
+                                                    child: const TextField(
+                                                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
+                                                      decoration: InputDecoration(
+                                                        labelText: 'FC',
+                                                        floatingLabelAlignment: FloatingLabelAlignment.center,
+                                                        labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
+                                                        contentPadding: EdgeInsets.only(left: 10, bottom: 10),
+                                                      ),
+                                                    )),
+
+                                                  Container(
+                                                    margin: EdgeInsets.only(top: 1),
                                                       height: 40,
                                                       width: 200,
-
-                                                      //color: Colors.green,
-                                                      child: const TextField(
-                                                        //scrollPadding: EdgeInsets.only(bottom: 10),
-                                                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
-                                                        decoration: InputDecoration(
-                                                          labelText: 'TA',
-                                                          floatingLabelAlignment: FloatingLabelAlignment.center,
-                                                          labelStyle: TextStyle(
-                                                              color: Colors.blue,
-                                                              fontWeight: FontWeight.w900),
-                                                          contentPadding: EdgeInsets.only(left: 10, bottom: 10),
-                                                          //contentPadding: EdgeInsets.all(5)
-                                                        ),
-                                                      )),
-
-                                                Container(
-                                                     margin: EdgeInsets.only(top: 1),
-                                                      height: 40,
-                                                      width: 200,
                                                       child: const TextField(
                                                         style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
                                                         decoration: InputDecoration(
-                                                          labelText: 'FC',
+                                                          labelText: 'O2',
                                                           floatingLabelAlignment: FloatingLabelAlignment.center,
                                                           labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
                                                           contentPadding: EdgeInsets.only(left: 10, bottom: 10),
                                                         ),
                                                       )),
 
-                                                    Container(
-                                                      margin: EdgeInsets.only(top: 1),
-                                                        height: 40,
-                                                        width: 200,
-                                                        child: const TextField(
-                                                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
-                                                          decoration: InputDecoration(
-                                                            labelText: 'O2',
-                                                            floatingLabelAlignment: FloatingLabelAlignment.center,
-                                                            labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
-                                                            contentPadding: EdgeInsets.only(left: 10, bottom: 10),
-                                                          ),
-                                                        )),
-
-                                              ]),
+                                            ]),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 10),
+                                            child: const Text(
+                                              'Nivel de Dolor',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 20),
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: 4,
-                                            child: Container(
-                                              margin: EdgeInsets.only(top: 30),
-                                              child: Text(
-                                                'Nivel de Dolor',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w900,
-                                                    fontSize: 20),
-                                              ),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 15, bottom: 10),
+                                            height: 35,
+                                            width: 350,
+                                            decoration: BoxDecoration(
+                                              border:
+                                                  Border.all(color: Colors.blue),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 4,
-                                            child: Container(
-                                              margin: EdgeInsets.only(top: 15, bottom: 10),
-                                              height: 75,
-                                              width: 350,
-                                              decoration: BoxDecoration(
-                                                border:
-                                                    Border.all(color: Colors.blue),
-                                              ),
-                                              child: Slider(
-                                                value: _currentSliderValue2,
-                                                max: 100,
-                                                divisions: 10,
-                                                activeColor: Colors.red,
-                                                inactiveColor: Colors.green,
-                                                label: _currentSliderValue2
-                                                    .round()
-                                                    .toString(),
-                                                onChanged: (double value) {
-                                                  setState(() {
-                                                    _currentSliderValue2 = value;
-                                                  });
-                                                },
-                                              ),
+                                            child: Slider(
+                                              value: _currentSliderValue2,
+                                              max: 100,
+                                              divisions: 10,
+                                              activeColor: Colors.red,
+                                              inactiveColor: Colors.green,
+                                              label: _currentSliderValue2
+                                                  .round()
+                                                  .toString(),
+                                              onChanged: (double value) {
+                                                setState(() {
+                                                  _currentSliderValue2 = value;
+                                                });
+                                              },
                                             ),
                                           ),
                                           const Text(
@@ -309,49 +283,42 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                 fontWeight: FontWeight.w900,
                                                 fontSize: 20),
                                           ),
-                                          Expanded(
-                                            flex: 4,
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                  top: 15, bottom: 15),
-                                              height: 75,
-                                              width: 350,
-                                              decoration: BoxDecoration(
-                                                border:
-                                                    Border.all(color: Colors.blue),
-                                              ),
-                                              child: Slider(
-                                                value: _currentSliderValue,
-                                                max: 100,
-                                                divisions: 10,
-                                                activeColor: Colors.red,
-                                                inactiveColor: Colors.green,
-                                                label: _currentSliderValue
-                                                    .round()
-                                                    .toString(),
-                                                onChanged: (double value) {
-                                                  setState(() {
-                                                    _currentSliderValue = value;
-                                                  });
-                                                },
-                                              ),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                                top: 15, bottom: 5),
+                                            height: 35,
+                                            width: 350,
+                                            decoration: BoxDecoration(
+                                              border:
+                                                  Border.all(color: Colors.blue),
+                                            ),
+                                            child: Slider(
+                                              value: _currentSliderValue,
+                                              max: 100,
+                                              divisions: 10,
+                                              activeColor: Colors.red,
+                                              inactiveColor: Colors.green,
+                                              label: _currentSliderValue
+                                                  .round()
+                                                  .toString(),
+                                              onChanged: (double value) {
+                                                setState(() {
+                                                  _currentSliderValue = value;
+                                                });
+                                              },
                                             ),
                                           ),
-                                          Expanded(
-                                            flex:4,
-                                            child: Container(
-                                              child: boton('Cancelar', Colors.red, 50, () {
+                                          boton('Cancelar', Colors.red, 50, () {
 
-                                              }),
-                                            )
-                                          )
+                                          })
+
                                         ]),
                                       )
                                     ]),
-                              ),
-                            ],
+
                           ),
                         ),
+
                       ]),
                 ),
               ),
@@ -363,10 +330,10 @@ class _HomeScreenState extends State<ExpedienteScreen> {
   Widget boton(String label, Color color, double ancho, Function() funcion) {
     return Container(
         margin: EdgeInsets.only(top: 15),
-        height: 38,
-        width: 100,
+        height: 40,
+        width: 150,
         child: ElevatedButton(
-          child: Text('${label}'),
+          child: Text('${label}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
           onPressed: funcion,
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(color),
