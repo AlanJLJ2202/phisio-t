@@ -45,7 +45,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                         Container(
                           margin: EdgeInsets.only(top: height * 0.05),
                           height: height * 0.08,
-                          width: width * 0.3,
+                          width: 400,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: Colors.blue, width: 4),
@@ -69,12 +69,12 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                             style: TextStyle(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.w800,
-                                fontSize: 25),
+                                fontSize: 20),
                           )),
                         ),
                         Container(
-                          height: 530,
-                          width: width * 0.6,
+                          height: 500,
+                          width: 850,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: Colors.blue, width: 4),
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                             flex: 11,
                                             child: Container(
                                               margin: EdgeInsets.only(top: 15, left: width*0.01),
-                                              height: height*0.55,
+                                              height: 500,
                                               width: 400,
                                               decoration: BoxDecoration(
                                                   border: Border.all(color: Colors.blue)),

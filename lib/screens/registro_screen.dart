@@ -45,7 +45,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Container(
-              height: 600,
+              height: 570,
               width: 450,
               margin: EdgeInsets.only(top: height*0.02),
 
@@ -75,7 +75,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
                 child: Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(top: 35),
+                        margin: const EdgeInsets.only(top: 20),
                         child: inputField('Nombre Completo', 350, txtNombre)
                         ),
                         Container(
@@ -260,7 +260,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
   Widget checkRow(double width) {
     return Container(
-      height: 50,
+      height: 48,
       width: width,
       margin: EdgeInsets.only(top: 15),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -355,18 +355,18 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
     //String url = Uri.parse("https://phisiot.000webhostapp.com/registro.php");
 
-    var response = await Dio().post(
-    "https://www.phisio-t.com/registro_paciente.php", 
-    data: {
+    final data = {
       "nombre": txtNombre.text,
       "telefono": txtTelefono.text,
       "edad": txtEdad.text,
       "fecha_nacimiento": txtFechaN.text,
       "ocupacion": txtOcupacion.text,
       "direccion": txtDireccion.text,
-    },
-    
-    );
+    };
+
+    print(data.entries);
+
+    var response = await Dio().get("https://www.phisio-t.com/registro_paciente.php", queryParameters: data);
 
     print('${response.data}');
 
