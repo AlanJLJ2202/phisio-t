@@ -28,13 +28,16 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 20,
           backgroundColor: Colors.blue,
           centerTitle: true,
-          title: const Text(
+          title: width < 450 ? const Text(
+            'Rehabilit',
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ) : const Text(
             'Rehabilit - Fisioterapia Integral y Deporte',
             style: TextStyle(fontWeight: FontWeight.w800),
           ),
         ),
         drawer: DrawerWidget(height),
-        body: ListView(
+        body: width > 450 ? ListView(
           children: [
             Column(children: [
               Row(
@@ -48,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 25, fontWeight: FontWeight.w900))),
                   Container(
                     margin: EdgeInsets.only(top: height * 0.08),
-                    child: inputField('', 250),
+                    child: inputField('', 350),
                   ),
                   Container(
                       margin: EdgeInsets.only(top: height * 0.085),
@@ -62,11 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           });
                         },
-                        icon: Icon(
-                          Icons.search_rounded,
-                          color: Colors.blue,
+                        icon: const Icon(
+                          Icons.person_search,
+                          color: Colors.green,
                         ),
-                        iconSize: 50,
+                        iconSize: 65,
                       ))
                 ],
               ),
@@ -79,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       Container(
-                          margin: EdgeInsets.only(left: 50),
+                          margin: const EdgeInsets.only(left: 50),
                           child: infoPaciente(
                               width,
                               height,
@@ -99,7 +102,71 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ]),
           ],
-        ));
+        )
+            :
+
+        ListView(
+
+          children: [
+            Column(
+              children: [
+                /*Container(
+                    child: const Text('Fisioterapia Integral y Deporte',
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w400, fontFamily: 'GreatVibes')
+                    )),*/
+                Container(
+                    margin: EdgeInsets.only(
+                        top: height * 0.08, left: width * 0.05),
+                    child: const Text('Buscar Paciente',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w900))),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+
+                    Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: inputField('', 275),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: IconButton(
+                        iconSize: 45,
+                        icon: const Icon(
+                          Icons.person_search,
+                          color: Colors.green,
+
+                        ),
+                        onPressed: () {},
+                        // onPressed: () =>_launchInBrowser(myUri)
+                      ),
+                    ),
+
+                  ],
+                ),
+                Column(
+                  children: [
+                    infoPaciente(width, height, 'Alan Eduardo Cabrera Alcala', 20, '435345553', 'Purisima del Rincon')
+                  ],
+                ),
+                Column(
+                  children: [
+                    infoPaciente(width, height, 'Alan Eduardo Cabrera Alcala', 20, '435345553', 'Purisima del Rincon')
+                  ],
+                ),
+                Column(
+                  children: [
+                    infoPaciente(width, height, 'Alan Eduardo Cabrera Alcala', 20, '435345553', 'Purisima del Rincon')
+                  ],
+                ),
+
+              ],
+            ),
+          ],
+        ),
+
+    );
   }
 
   Widget inputField(String label, double largo) {
@@ -109,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           height: 35,
           width: largo,
-          padding: EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.blue, width: 1),
             borderRadius: const BorderRadius.all(
@@ -136,9 +203,9 @@ class _HomeScreenState extends State<HomeScreen> {
             MaterialPageRoute(builder: (context) => ExpedienteScreen()));
       },
       child: Container(
-        margin: EdgeInsets.only(top: height * 0.08, right: 50),
-        //height: 700,
-        width: 570,
+        margin: width < 450 ? EdgeInsets.only(top: height * 0.06) : EdgeInsets.only(top: height * 0.08, right: 40),
+        height: width > 450 ? 470 : 370,
+        width: width > 450 ? 570 : 350,
         decoration: BoxDecoration(
           //color: Colors.transparent,
           border: Border.all(color: Colors.blue, width: 4),
@@ -163,23 +230,23 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
-            margin: EdgeInsets.only(top: 30, left: 30),
+            margin: const EdgeInsets.only(top: 30, left: 30),
             child: Text(nombre,
-                style: const TextStyle(
-                    fontSize: 35,
+                style: TextStyle(
+                    fontSize: width > 450 ? 32 : 32,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold)),
           ),
           Container(
-            margin: EdgeInsets.only(left: 30),
+            margin: const EdgeInsets.only(left: 30),
             child: Text('Edad: ${edad} años',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
+                style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 30, left: 30),
+                margin: width > 450 ? const EdgeInsets.only(top: 20, left: 30) : const EdgeInsets.only(top: 15, left: 30),
                 child: IconButton(
                   iconSize: 40,
                   icon: const Icon(
@@ -191,9 +258,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 30, left: 5, right: 15),
+                margin: width  > 450 ? const EdgeInsets.only(top: 30, left: 5, right: 15) : const EdgeInsets.only(top: 20, left: 5, right: 15),
                 child: Text('${telefono}',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
+                    style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
               ),
             ],
           ),
@@ -201,25 +268,37 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 20, left: 30),
-                child: Icon(Icons.location_pin, color: Colors.red, size: 40),
+                margin: width > 450 ? const EdgeInsets.only(top: 20, left: 30) : const EdgeInsets.only(top: 15, left: 30),
+                child: const Icon(Icons.location_pin, color: Colors.red, size: 40),
               ),
               Container(
-                margin: EdgeInsets.only(top: 15, left: 5, right: 15),
+                margin: width  > 700 ? const EdgeInsets.only(top: 30, left: 5, right: 15) : const EdgeInsets.only(top: 20, left: 5, right: 15),
                 child: Text('${ubicacion}',
                     style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
+                        const TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
               ),
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              boton('Expediente', Colors.green, 60, () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ExpedienteScreen()));
-              }),
+              Container(
+                margin: width > 450 ? const EdgeInsets.only(top: 40) : const EdgeInsets.only(top: 20),
+
+                child: boton('Expediente', Colors.green, 60, () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+                }, width),
+              ),
+              Container(
+                margin: width > 450 ? const EdgeInsets.only(top: 40) : const EdgeInsets.only(top: 20),
+                child: boton('Historial', Colors.grey, 60, () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+                }, width),
+              ),
             ],
           ),
         ]),
@@ -227,21 +306,22 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget boton(String label, Color color, double ancho, Function() funcion) {
+  Widget boton(String label, Color color, double ancho, Function() funcion, double width) {
     return Container(
-        margin: EdgeInsets.only(top: 30),
         height: 50,
-        width: 150,
+        width: width > 450 ? 150 : 120,
         child: ElevatedButton(
 
-          child: Text(
-            label,
-            style: const TextStyle(fontSize: 20),
-          ),
           onPressed: funcion,
+
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(color),
             elevation: MaterialStateProperty.all(25)
+          ),
+
+          child: Text(
+            label,
+            style: width > 450 ? TextStyle(fontSize: 20) : TextStyle(fontSize: 15),
           ),
         ));
   }
