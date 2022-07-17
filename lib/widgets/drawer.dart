@@ -93,7 +93,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 height: 1,
                 color: Colors.blue,
               ),
-              ListTile(
+              /*ListTile(
                 title: const Text('Expedientes', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
                 leading: const Icon(Icons.folder_shared_outlined),
                 iconColor: Colors.blue,
@@ -108,7 +108,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               const Divider(
                 height: 1,
                 color: Colors.blue,
-              ),
+              ),*/
               Container(
                 margin: EdgeInsets.only(top: widget.height*0.4),
                 width: 75,

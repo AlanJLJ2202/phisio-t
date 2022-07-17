@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
                 //bodyColor: Colors.white,
                 //displayColor: Colors.black
               )),
-      home: ExpedienteScreen(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

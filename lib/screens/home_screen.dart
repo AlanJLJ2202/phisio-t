@@ -1,10 +1,13 @@
+import 'dart:convert';
 import 'dart:ui';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
 import 'package:phisio_t/widgets/drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../models/paciente.dart';
 import '../utils/colores.dart';
 import 'expediente_screen.dart';
 
@@ -16,6 +19,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String visible = "visible";
   Uri myUri = Uri.parse("https://wa.me/+524761364798?text=Prueba%20envio%20de%20mensaje%20de%20la%20app%20a%20Whatsapp");
+  final TextEditingController txtBusqueda = TextEditingController();
+
+  List<Paciente> lista_pacientes = [];
+
 
 //Hm99618661
   @override
@@ -57,13 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.only(top: height * 0.085),
                       child: IconButton(
                         onPressed: () {
-                          Future.delayed(const Duration(milliseconds: 350), () {
-                            setState(() {
-                              //Cuando se le da en el icono de buscar, se hace visible la lista maquetada
-
-                              visible = 'visible';
-                            });
-                          });
+                          Future.delayed(const Duration(milliseconds: 350), () => _busqueda());
                         },
                         icon: const Icon(
                           Icons.person_search,
@@ -74,28 +75,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               Visibility(
-                visible: visible == 'visible' ? true : false,
+                visible: lista_pacientes.length > 0 ? true : false,
                 child: SizedBox(
                   height: 430,
                   child: ListView(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
-                      Container(
-                          margin: const EdgeInsets.only(left: 50),
-                          child: infoPaciente(
-                              width,
-                              height,
-                              'Alan Jesus Lopez Jacinto',
-                              21,
-                              "4761072633",
-                              "Morelos #117, Purisima del Rincón")),
-                      infoPaciente(width, height, 'Mario Valadez Quiroz', 21,
-                          "476104545", "Cañada de Negros"),
-                      infoPaciente(width, height, 'Gerson Luis Lopez Jacinto',
-                          26, "4761072633", "San Miguel, León"),
-                      infoPaciente(width, height, 'Maria Elena Jacinto Mendez',
-                          21, "4761072232", "Dolores"),
+                      Row(
+                        children: List.generate(lista_pacientes.length, (index) {
+                          return infoPaciente(lista_pacientes[index], context, width, height);
+                        }),
+                      )
+
                     ],
                   ),
                 ),
@@ -138,29 +130,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.green,
 
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Future.delayed(const Duration(milliseconds: 350), () => _busqueda());
+                        },
                         // onPressed: () =>_launchInBrowser(myUri)
                       ),
                     ),
 
                   ],
                 ),
-                Column(
-                  children: [
-                    infoPaciente(width, height, 'Alan Eduardo Cabrera Alcala', 20, '435345553', 'Purisima del Rincon')
-                  ],
+                Visibility(
+                  visible: lista_pacientes.length > 0 ? true : false,
+                  child: Column(
+                    children: List.generate(lista_pacientes.length, (index) {
+                      return infoPaciente(lista_pacientes[index], context, width, height);
+                    }),
+                  )
                 ),
-                Column(
-                  children: [
-                    infoPaciente(width, height, 'Alan Eduardo Cabrera Alcala', 20, '435345553', 'Purisima del Rincon')
-                  ],
-                ),
-                Column(
-                  children: [
-                    infoPaciente(width, height, 'Alan Eduardo Cabrera Alcala', 20, '435345553', 'Purisima del Rincon')
-                  ],
-                ),
-
               ],
             ),
           ],
@@ -183,7 +169,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Radius.circular(14),
             ),
           ),
-          child: const TextField(
+          child: TextField(
+            controller: txtBusqueda,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
             decoration: InputDecoration(
@@ -195,16 +182,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget infoPaciente(double width, double height, String nombre, int edad,
-      String telefono, String ubicacion) {
+  Widget infoPaciente(Paciente paciente, BuildContext context, double width, double height) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+        //Navigator.push(context, MaterialPageRoute(builder: (context) => ExpedienteScreen(paciente)));
       },
       child: Container(
         margin: width < 450 ? EdgeInsets.only(top: height * 0.06) : EdgeInsets.only(top: height * 0.08, right: 40),
-        height: width > 450 ? 470 : 370,
+        height: width > 450 ? 470 : 350,
         width: width > 450 ? 570 : 350,
         decoration: BoxDecoration(
           //color: Colors.transparent,
@@ -231,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
             margin: const EdgeInsets.only(top: 30, left: 30),
-            child: Text(nombre,
+            child: Text(paciente.nombre,
                 style: TextStyle(
                     fontSize: width > 450 ? 32 : 32,
                     color: Colors.blue,
@@ -239,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Container(
             margin: const EdgeInsets.only(left: 30),
-            child: Text('Edad: ${edad} años',
+            child: Text('Edad: ${paciente.edad} años',
                 style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
           ),
           Row(
@@ -259,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 margin: width  > 450 ? const EdgeInsets.only(top: 30, left: 5, right: 15) : const EdgeInsets.only(top: 20, left: 5, right: 15),
-                child: Text('${telefono}',
+                child: Text('${paciente.telefono}',
                     style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
               ),
             ],
@@ -273,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 margin: width  > 700 ? const EdgeInsets.only(top: 30, left: 5, right: 15) : const EdgeInsets.only(top: 20, left: 5, right: 15),
-                child: Text('${ubicacion}',
+                child: Text('${paciente.direccion}',
                     style:
                         const TextStyle(fontSize: 25, fontWeight: FontWeight.w800)),
               ),
@@ -288,15 +273,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: boton('Expediente', Colors.green, 60, () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+                      MaterialPageRoute(builder: (context) => ExpedienteScreen(paciente)));
                 }, width),
               ),
               Container(
                 margin: width > 450 ? const EdgeInsets.only(top: 40) : const EdgeInsets.only(top: 20),
                 child: boton('Historial', Colors.grey, 60, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => ExpedienteScreen()));
                 }, width),
               ),
             ],
@@ -325,6 +308,29 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ));
   }
+
+
+  Future _busqueda() async {
+
+    final data = {
+      "busqueda": txtBusqueda.text,
+    };
+
+    print(data.entries);
+
+    final response = await Dio().get("https://www.phisio-t.com/busqueda_paciente.php", queryParameters: data);
+
+    var datos = jsonDecode(response.data);
+    print(datos);
+
+    setState(() {
+      lista_pacientes = List<Paciente>.from(datos.map((x) => Paciente.fromJson(x)));
+    });
+
+    print(lista_pacientes.asMap());
+    //print('PRINT DE PACIENTES = ' + lista_pacientes.asMap().toString());
+  }
+
 }
 
 class CustomScrollBehavior extends MaterialScrollBehavior {
@@ -335,11 +341,6 @@ class CustomScrollBehavior extends MaterialScrollBehavior {
       };
 }
 
-//Future<void> _launchInBrowser(Uri url) async {
-  //  if (!await launchUrl(
-    //  url,
-      //mode: LaunchMode.externalApplication,
-    //)) {
-      //throw 'Could not launch $url';
-    //}
-  //}
+
+
+

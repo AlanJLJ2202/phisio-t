@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:dio/dio.dart';
+import 'package:phisio_t/screens/home_screen.dart';
 import '../widgets/drawer.dart';
 
 
@@ -353,8 +354,6 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
   Future register() async {
 
-    //String url = Uri.parse("https://phisiot.000webhostapp.com/registro.php");
-
     final data = {
       "nombre": txtNombre.text,
       "telefono": txtTelefono.text,
@@ -374,8 +373,9 @@ class _RegistroScreenState extends State<RegistroScreen> {
 Future.delayed(const Duration(seconds: 1), () {
   //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(),),);
    Fluttertoast.showToast(
-          msg: "Revisa la consola"
+          msg: "Se ha registrado el paciente con exito"
       );
+   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
 });
     //var data = json.decode(response.body);
     //if (data == "Success") {

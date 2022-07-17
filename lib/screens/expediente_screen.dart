@@ -1,10 +1,20 @@
 import 'dart:ui';
 
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:phisio_t/widgets/drawer.dart';
+
+import '../models/paciente.dart';
 
 
 class ExpedienteScreen extends StatefulWidget {
+
+  final Paciente paciente;
+
+
+  ExpedienteScreen(this.paciente);
+
   @override
   State<ExpedienteScreen> createState() => _HomeScreenState();
 }
@@ -13,21 +23,30 @@ class _HomeScreenState extends State<ExpedienteScreen> {
   double _currentSliderValue = 0;
   double _currentSliderValue2 = 0;
 
+  final now = new DateTime.now();
+
+  void initState() {
+    super.initState();
+  }
+
+  final TextEditingController txtBusqueda = TextEditingController();
+  final TextEditingController txtTA = TextEditingController();
+  final TextEditingController txtFC = TextEditingController();
+  final TextEditingController txt02 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
-    final TextEditingController _descripcion = TextEditingController();
 
     return Scaffold(
         appBar: AppBar(
           elevation: 20,
           backgroundColor: Colors.blue,
           centerTitle: true,
-          title: const Text(
-            'Expediente / 2022-07-12',
-            style: TextStyle(fontWeight: FontWeight.w800),
+          title: Text(
+            'Expediente / ${now.year}-${now.month}-${now.day}',
+            style: const TextStyle(fontWeight: FontWeight.w800),
           ),
         ),
         drawer: DrawerWidget(height),
@@ -58,10 +77,10 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                   spreadRadius: 3.0,
                                 )
                               ]),
-                          child: const Center(
+                          child: Center(
                               child: Text(
-                            'Maria Elena Jacinto Mendez',
-                            style: TextStyle(
+                            widget.paciente.nombre,
+                            style: const TextStyle(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 20),
@@ -89,6 +108,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                   spreadRadius: 3.0,
                                 )
                               ],
+                            
                             /*gradient: LinearGradient(
                                 colors: [
                                   Colors.pinkAccent,
@@ -114,21 +134,8 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                         height: 500,
                                         width: 400,
                                         child: Column(children: [
-                                          /*Expanded(
-                                              flex: 1,
-                                              child: Container(
-                                                                                            alignment: Alignment.centerLeft,
-                                                margin: EdgeInsets.only(top: 10, left: 10),
-                                                child: Text(
-                                                  '2022/06/30',
-                                                  style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontWeight: FontWeight.w800,
-                                                      fontSize: 20),
-                                                ),
-                                              )),*/
                                           Container(
-                                              margin: EdgeInsets.only(top: 15),
+                                              margin: const EdgeInsets.only(top: 15),
                                               child: const Text(
                                                 'Descripcion',
                                                 style: TextStyle(
@@ -145,7 +152,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                               decoration: BoxDecoration(
                                                   border: Border.all(color: Colors.blue)),
                                               child: TextField(
-                                                controller: _descripcion,
+                                                controller: txtBusqueda,
                                                 keyboardType: TextInputType.multiline,
                                                 minLines: null,
                                                 maxLines: null,
@@ -153,10 +160,14 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                 decoration: const InputDecoration(
                                                   contentPadding: EdgeInsets.all(15),
                                                 ),
-                                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
+                                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
                                               ),
                                             ),
-                                           boton('Guardar', Colors.green, 13, () {})
+                                           boton('Guardar', Colors.green, 13, () {
+
+                                             print('${now.year}-${now.month}-${now.day}');
+
+                                           })
                                         ]),
                                       ),
                                       Container(
@@ -176,8 +187,8 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                             ),
                                           ),
                                           Container(
-                                            padding: EdgeInsets.only(bottom: 15),
-                                            margin: EdgeInsets.only(top: 15, bottom: 10),
+                                            padding: const EdgeInsets.only(bottom: 15),
+                                            margin: const EdgeInsets.only(top: 15, bottom: 10),
                                             height: 150,
                                             width: 350,
                                             decoration: BoxDecoration(
@@ -188,15 +199,16 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                 children: [
 
                                               Container(
-                                                    margin: EdgeInsets.only(top: 1),
+                                                    margin: const EdgeInsets.only(top: 1),
                                                     height: 40,
                                                     width: 200,
 
                                                     //color: Colors.green,
-                                                    child: const TextField(
+                                                    child: TextField(
                                                       //scrollPadding: EdgeInsets.only(bottom: 10),
-                                                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
-                                                      decoration: InputDecoration(
+                                                      controller: txtTA,
+                                                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
+                                                      decoration: const InputDecoration(
                                                         labelText: 'TA',
                                                         floatingLabelAlignment: FloatingLabelAlignment.center,
                                                         labelStyle: TextStyle(
@@ -208,12 +220,13 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                     )),
 
                                               Container(
-                                                   margin: EdgeInsets.only(top: 1),
+                                                   margin: const EdgeInsets.only(top: 1),
                                                     height: 40,
                                                     width: 200,
-                                                    child: const TextField(
-                                                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
-                                                      decoration: InputDecoration(
+                                                    child: TextField(
+                                                      controller: txtFC,
+                                                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
+                                                      decoration: const InputDecoration(
                                                         labelText: 'FC',
                                                         floatingLabelAlignment: FloatingLabelAlignment.center,
                                                         labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
@@ -222,23 +235,24 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                     )),
 
                                                   Container(
-                                                    margin: EdgeInsets.only(top: 1),
+                                                    margin: const EdgeInsets.only(top: 1),
                                                       height: 40,
                                                       width: 200,
-                                                      child: const TextField(
-                                                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
-                                                        decoration: InputDecoration(
+                                                      child: TextField(
+                                                        controller: txt02,
+                                                        style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
+                                                        decoration: const InputDecoration(
                                                           labelText: 'O2',
                                                           floatingLabelAlignment: FloatingLabelAlignment.center,
-                                                          labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
-                                                          contentPadding: EdgeInsets.only(left: 10, bottom: 10),
+                                                          labelStyle: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
+                                                          contentPadding: const EdgeInsets.only(left: 10, bottom: 10),
                                                         ),
                                                       )),
 
                                             ]),
                                           ),
                                           Container(
-                                            margin: EdgeInsets.only(top: 10),
+                                            margin: const EdgeInsets.only(top: 10),
                                             child: const Text(
                                               'Nivel de Dolor',
                                               style: TextStyle(
@@ -248,7 +262,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                             ),
                                           ),
                                           Container(
-                                            margin: EdgeInsets.only(top: 15, bottom: 10),
+                                            margin: const EdgeInsets.only(top: 15, bottom: 10),
                                             height: 35,
                                             width: 350,
                                             decoration: BoxDecoration(
@@ -346,10 +360,10 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                   spreadRadius: 3.0,
                                 )
                               ]),
-                          child: const Center(
+                          child: Center(
                               child: Text(
-                                'Maria Elena Jacinto Mendez',
-                                style: TextStyle(
+                                  widget.paciente.nombre,
+                                style: const TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.w800,
                                     fontSize: 20),
@@ -398,7 +412,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(top: 20),
+                                    margin: const EdgeInsets.only(top: 20),
                                     height: 890,
                                     width: 400,
                                     child: Column(children: [
@@ -433,7 +447,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                         decoration: BoxDecoration(
                                             border: Border.all(color: Colors.blue)),
                                         child: TextField(
-                                          controller: _descripcion,
+                                          controller: txtBusqueda,
                                           keyboardType: TextInputType.multiline,
                                           minLines: null,
                                           maxLines: null,
@@ -441,11 +455,11 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                           decoration: const InputDecoration(
                                             contentPadding: EdgeInsets.all(15),
                                           ),
-                                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
+                                          style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(top: 10),
+                                        margin: const EdgeInsets.only(top: 10),
                                         child: const Text(
                                           'Nivel de Dolor',
                                           style: TextStyle(
@@ -455,7 +469,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(top: 15, bottom: 10),
+                                        margin: const EdgeInsets.only(top: 15, bottom: 10),
                                         height: 35,
                                         width: 350,
                                         decoration: BoxDecoration(
@@ -521,8 +535,8 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                         ),
                                       ),
                                       Container(
-                                        padding: EdgeInsets.only(bottom: 15),
-                                        margin: EdgeInsets.only(top: 15, bottom: 20),
+                                        padding: const EdgeInsets.only(bottom: 15),
+                                        margin: const EdgeInsets.only(top: 15, bottom: 20),
                                         height: 150,
                                         width: 350,
                                         decoration: BoxDecoration(
@@ -533,7 +547,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                             children: [
 
                                               Container(
-                                                  margin: EdgeInsets.only(top: 1),
+                                                  margin: const EdgeInsets.only(top: 1),
                                                   height: 40,
                                                   width: 200,
 
@@ -553,7 +567,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                   )),
 
                                               Container(
-                                                  margin: EdgeInsets.only(top: 1),
+                                                  margin: const EdgeInsets.only(top: 1),
                                                   height: 40,
                                                   width: 200,
                                                   child: const TextField(
@@ -567,7 +581,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                   )),
 
                                               Container(
-                                                  margin: EdgeInsets.only(top: 1),
+                                                  margin: const EdgeInsets.only(top: 1),
                                                   height: 40,
                                                   width: 200,
                                                   child: const TextField(
@@ -608,15 +622,18 @@ class _HomeScreenState extends State<ExpedienteScreen> {
 
   Widget boton(String label, Color color, double ancho, Function() funcion) {
     return Container(
-        margin: EdgeInsets.only(top: 15),
+        margin: const EdgeInsets.only(top: 15),
         height: 40,
         width: 150,
         child: ElevatedButton(
-          child: Text('${label}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+          child: Text('${label}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
           onPressed: funcion,
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(color),
           ),
         ));
   }
+
+
+
 }
