@@ -9,6 +9,7 @@ import 'package:phisio_t/screens/historial_screen.dart';
 import 'package:phisio_t/widgets/drawer.dart';
 
 import '../models/paciente.dart';
+import 'home_screen.dart';
 
 
 class ExpedienteScreen extends StatefulWidget {
@@ -317,6 +318,8 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                             ),
                                           ),
                                           boton('Cancelar', Colors.red, 50, () {
+
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
                                           })
 
@@ -636,31 +639,43 @@ class _HomeScreenState extends State<ExpedienteScreen> {
 
   Future register(Paciente paciente) async {
 
-    final data = {
-      "paciente_id": int.parse(paciente.id),
-      "descripcion": txtDescripcion.text,
-      "nivel_dolor": _nivel_dolorValue.toString(),
-      "nivel_inflamacion": _nivel_inflamacionValue.toString(),
-      "signo_ta": txtTA.text,
-      "signo_fc": txtFC.text,
-      "signo_o2": txt02.text,
-      "fecha": '${now.year}-${now.month}-${now.day}'
-    };
 
-    print(data.entries);
-
-    var response = await Dio().get("https://www.phisio-t.com/registro_expediente.php", queryParameters: data);
-
-    print('${response.data}');
-
-
-    Future.delayed(const Duration(seconds: 1), () {
-      //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(),),);
+    if(txtDescripcion.text.isEmpty){
       Fluttertoast.showToast(
-          msg: "Se ha registrado el expediente con exito"
+          msg: "Falta agregar la descripcion",
+          webBgColor: 'linear-gradient(to right, #EF2D13, #EF2D13)'
       );
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HistorialScreen(paciente)));
-    });
+    }else{
+
+      final data = {
+        "paciente_id": int.parse(paciente.id),
+        "descripcion": txtDescripcion.text,
+        "nivel_dolor": _nivel_dolorValue.toString(),
+        "nivel_inflamacion": _nivel_inflamacionValue.toString(),
+        "signo_ta": txtTA.text,
+        "signo_fc": txtFC.text,
+        "signo_o2": txt02.text,
+        "fecha": '${now.year}-${now.month}-${now.day}'
+      };
+
+      print(data.entries);
+
+      var response = await Dio().get("https://www.phisio-t.com/registro_expediente.php", queryParameters: data);
+
+      print('${response.data}');
+
+
+      Future.delayed(const Duration(seconds: 1), () {
+        //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(),),);
+        Fluttertoast.showToast(
+            msg: "Se ha registrado el expediente con exito"
+        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HistorialScreen(paciente)));
+      });
+
+    }
+
+
 
   }
 

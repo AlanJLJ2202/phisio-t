@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:phisio_t/screens/historial_screen.dart';
 import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
@@ -323,6 +324,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
     var datos = jsonDecode(response.data);
     print(datos);
+
+    if(datos == null){
+      Fluttertoast.showToast(
+          msg: "Parece que no se encontró a ningun paciente con ese nombre",
+          backgroundColor: Colors.red,
+          webBgColor: 'linear-gradient(to right, #EF2D13, #EF2D13)'
+      );
+    }
 
     setState(() {
       lista_pacientes = List<Paciente>.from(datos.map((x) => Paciente.fromJson(x)));

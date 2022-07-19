@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:phisio_t/screens/expediente_screen.dart';
 import '../models/expediente.dart';
 import '../models/paciente.dart';
 import '../widgets/drawer.dart';
@@ -57,13 +58,15 @@ class _HistorialScreenState extends State<HistorialScreen> {
                   color: Colors.blue,
                 ),
               ),
+
               Container(
-                margin: EdgeInsets.only(bottom: 15),
-                child: Text(
-                    '${widget.paciente.nombre}',
-                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.w800),
-                ),
-              ),
+                    margin: EdgeInsets.only(bottom: 15),
+                    child: Text(
+                        '${widget.paciente.nombre}',
+                       style: TextStyle(fontSize: 35, fontWeight: FontWeight.w800),
+                    ),
+                  ),
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -106,8 +109,6 @@ class _HistorialScreenState extends State<HistorialScreen> {
                       '${widget.paciente.ocupacion}',
                       style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black),
                     ),
-
-
                   ),
                 ],
               ),
@@ -130,7 +131,7 @@ class _HistorialScreenState extends State<HistorialScreen> {
                 ],
               ),
 
-              Column(
+              widget.paciente.enfermedad_cronica != '' ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
@@ -146,9 +147,9 @@ class _HistorialScreenState extends State<HistorialScreen> {
 
                   ),
                 ],
-              ),
+              ) : Container(),
 
-              Column(
+              widget.paciente.otra_enfermedad != 'Sin Hipertensión, Sin Diabetes, Sin Art/Ost, Sin Enfermedad Pulmonar' ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
@@ -165,11 +166,25 @@ class _HistorialScreenState extends State<HistorialScreen> {
 
                   ),
                 ],
-              ),
+              ) : Container(),
+
 
               Container(
-                margin: EdgeInsets.only(top: 20, bottom: 20),
+                margin: EdgeInsets.only(top: 20, bottom: 5),
                 child: Text('Historial', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 35, fontWeight: FontWeight.w600),),
+              ),
+              Container(
+                width: 75,
+                margin: EdgeInsets.only(bottom: 20),
+                child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ExpedienteScreen(widget.paciente)));
+                  },
+                  child: Icon(Icons.add, color: Colors.white),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color> (Colors.green),
+                  ),
+                ),
               ),
               lista_expedientes.length > 0 ? Column(
 

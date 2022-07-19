@@ -82,36 +82,36 @@ class _RegistroScreenState extends State<RegistroScreen> {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 20),
-                        child: inputField('Nombre Completo', 350, txtNombre)
+                        child: inputField('Nombre Completo', 350, txtNombre, 100, '')
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Telefono', 350, txtTelefono)
+                          child: inputField('Telefono', 350, txtTelefono, 10, '')
                           ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
                               margin: EdgeInsets.only(top: 15, right: 30),
-                              child: inputField('Edad', 75, txtEdad)
+                              child: inputField('Edad', 75, txtEdad, 2, '')
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15, left: 10),
-                                child: inputField('Fecha de nacimiento', 230, txtFechaN)
+                                child: inputField('Fecha de nacimiento', 230, txtFechaN, 10, 'año-dia-mes')
                               ),
                           ],
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Dirección', 350, txtDireccion)
+                          child: inputField('Dirección', 350, txtDireccion, 100, '')
                         ),
                          Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Ocupación', 350, txtOcupacion)
+                          child: inputField('Ocupación', 350, txtOcupacion, 100, '')
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Enfermedad cronica', 350, txtEnfermedadC)
+                          child: inputField('Enfermedad cronica', 350, txtEnfermedadC, 100, '')
                           ),
                         checkRow(width),
                          Row(
@@ -124,6 +124,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
                               margin: EdgeInsets.only(left: 10),
                               child: boton('Cancelar', Colors.red, height, () {
 
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
                               }))
                           ],
@@ -138,28 +139,9 @@ class _RegistroScreenState extends State<RegistroScreen> {
   }
 
 
-  _selectFirstDate(context) async {
-    DateTime? _selectedDate = null;
-    DateTime? newSelectedDate = await showDatePicker(
-        context: context,
-        initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
-        firstDate: DateTime.utc(1950),
-        lastDate: DateTime.now(),
-        helpText: 'Selecciona una fecha',
-        cancelText: 'Cancelar');
-
-    if (newSelectedDate != null) {
-      _selectedDate = newSelectedDate;
-      setState(() {
-        var fecha_publicacion = DateFormat("yyyy-MM-dd").format(_selectedDate!);
-        txtFechaN.text = fecha_publicacion;
-      });
-    }
-  }
-
 //Componentes personalizados por nosotros que reciben parametros dinamicos
 
-  Widget inputField(String label, double largo, TextEditingController controller) {
+  Widget inputField(String label, double largo, TextEditingController controller, int maxLenght, String hint) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -177,6 +159,8 @@ class _RegistroScreenState extends State<RegistroScreen> {
             ),
           ),
           child: TextField(
+
+            maxLength: maxLenght,
             controller: controller,
             textAlign: TextAlign.center,
             style: const TextStyle(
@@ -185,7 +169,9 @@ class _RegistroScreenState extends State<RegistroScreen> {
               color: Colors.black
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(bottom: 10)
+              counterText: '',
+              hintText: hint,
+              contentPadding: const EdgeInsets.only(bottom: 10)
             ),
           ),
         ),
@@ -288,33 +274,55 @@ class _RegistroScreenState extends State<RegistroScreen> {
     String otras_enfermedades = '${hipertension}, ${diabetes}, ${Artritis}, ${enf_pulmonar}';
 
 
-    print('enfermedades');
-    print(otras_enfermedades);
+    if(txtNombre.text.isEmpty
+        || txtTelefono.text.isEmpty
+        || txtEdad.text.isEmpty
+        || txtFechaN.text.isEmpty
+        || txtDireccion.text.isEmpty){
 
-    final data = {
-      "nombre": txtNombre.text,
-      "telefono": txtTelefono.text,
-      "edad": txtEdad.text,
-      "fecha_nacimiento": txtFechaN.text,
-      "ocupacion": txtOcupacion.text,
-      "direccion": txtDireccion.text,
-      "enfermedad_cronica": txtEnfermedadC.text,
-      "otra_enfermedad": otras_enfermedades
-    };
-
-    var response = await Dio().get("https://www.phisio-t.com/registro_paciente.php", queryParameters: data);
-
-    print('${response.data}');
-
-
-Future.delayed(const Duration(seconds: 1), () {
-
-   Fluttertoast.showToast(
-          msg: "Se ha registrado el paciente con exito"
+      Fluttertoast.showToast(
+          msg: "Falta informacion por capturar",
+          backgroundColor: Colors.red,
+          webBgColor: 'linear-gradient(to right, #EF2D13, #EF2D13)'
       );
-   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-   
-  });
+
+    }else{
+
+
+      print('enfermedades');
+      print(otras_enfermedades);
+
+      final data = {
+        "nombre": txtNombre.text,
+        "telefono": txtTelefono.text,
+        "edad": txtEdad.text,
+        "fecha_nacimiento": txtFechaN.text,
+        "ocupacion": txtOcupacion.text,
+        "direccion": txtDireccion.text,
+        "enfermedad_cronica": txtEnfermedadC.text,
+        "otra_enfermedad": otras_enfermedades
+      };
+
+      var response = await Dio().get("https://www.phisio-t.com/registro_paciente.php", queryParameters: data);
+
+      print('${response.data}');
+
+
+      Future.delayed(const Duration(seconds: 1), () {
+
+        Fluttertoast.showToast(
+            msg: "Se ha registrado el paciente con exito"
+        );
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+
+      });
+
+
+    }
+
+
+
 
   }
 }
