@@ -279,8 +279,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 margin: width > 450 ? const EdgeInsets.only(top: 40) : const EdgeInsets.only(top: 20),
-                child: boton('Historial', Colors.grey, 60, () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HistorialScreen()));
+                child: boton('Historial', Colors.deepOrangeAccent, 60, () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HistorialScreen(paciente)));
                 }, width),
               ),
             ],

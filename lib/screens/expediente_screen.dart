@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:phisio_t/screens/historial_screen.dart';
 import 'package:phisio_t/widgets/drawer.dart';
 
 import '../models/paciente.dart';
@@ -658,7 +659,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
       Fluttertoast.showToast(
           msg: "Se ha registrado el expediente con exito"
       );
-      //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HistorialScreen(paciente)));
     });
 
   }
