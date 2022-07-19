@@ -25,8 +25,13 @@ class _RegistroScreenState extends State<RegistroScreen> {
   final TextEditingController txtFechaN = TextEditingController();
   final TextEditingController txtOcupacion = TextEditingController();
   final TextEditingController txtDireccion = TextEditingController();
-  final TextEditingController txtEnfermedad = TextEditingController();
+  final TextEditingController txtEnfermedadC = TextEditingController();
 
+
+  String hipertension = 'Sin Hipertensión';
+  String diabetes = 'Sin Diabetes';
+  String Artritis = 'Sin Art/Ost';
+  String enf_pulmonar = 'Sin Enfermedad Pulmonar';
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +111,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: inputField('Enfermedad cronica', 350, txtEnfermedad)
+                          child: inputField('Enfermedad cronica', 350, txtEnfermedadC)
                           ),
                         checkRow(width),
                          Row(
@@ -117,7 +122,10 @@ class _RegistroScreenState extends State<RegistroScreen> {
                               child: boton('Guardar', Colors.green, height, () => register())),
                             Container(
                               margin: EdgeInsets.only(left: 10),
-                              child: boton('Cancelar', Colors.red, height, (){}))
+                              child: boton('Cancelar', Colors.red, height, () {
+
+
+                              }))
                           ],
                      ),
                   ]
@@ -129,23 +137,6 @@ class _RegistroScreenState extends State<RegistroScreen> {
     );  //bottomNavigationBar: BottomNavigation(currentTab: _currentTab, onSelectTab: _selectTab));
   }
 
-//En esta parte se crean las funciones y los metodos dentro del contexto de la clase
-
-  var _currentTab = TabItem.Expediente;
-
-  final _navigatorKeys = {
-    TabItem.Expediente: GlobalKey<NavigatorState>(),
-    TabItem.Agenda: GlobalKey<NavigatorState>(),
-  };
-
-  void _selectTab(TabItem tabItem) {
-    if (tabItem == _currentTab) {
-      // pop to first route
-      _navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
-    } else {
-      setState(() => _currentTab = tabItem);
-    }
-  }
 
   _selectFirstDate(context) async {
     DateTime? _selectedDate = null;
@@ -202,62 +193,6 @@ class _RegistroScreenState extends State<RegistroScreen> {
     );
   }
 
-  Widget inputDate(TextEditingController ctrl, String tipo,
-      BuildContext context, String hint) {
-    final inputBorder = OutlineInputBorder(
-        borderSide: BorderSide(width: .1, color: Colors.transparent),
-        borderRadius: BorderRadius.all(Radius.circular(4)));
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-            margin: EdgeInsets.only(left: 10),
-            child: Text('Fecha de nacimiento',
-                style: TextStyle(fontWeight: FontWeight.w600))),
-        Container(
-          height: 35,
-          width: 250,
-          padding: EdgeInsets.only(left: 10, right: 10),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.blue, width: 1),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(14),
-            ),
-          ),
-          child: TextField(
-            onTap: () {
-              if (tipo == 'date') {
-                _selectFirstDate(context);
-              }
-            },
-            focusNode: tipo == 'date' || tipo == 'date2'
-                ? AlwaysDisabledFocusNode()
-                : null,
-            controller: ctrl,
-            autocorrect: false,
-            keyboardType:
-                tipo == 'numero' ? TextInputType.number : TextInputType.text,
-            enableSuggestions: false,
-            cursorColor: Colors.blue,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 14,
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Montserrat'),
-            decoration: InputDecoration(
-              hintText: hint,
-              contentPadding: EdgeInsets.only(top: 15),
-              border: inputBorder,
-              focusedBorder: inputBorder,
-              enabledBorder: inputBorder,
-            ),
-          ),
-        )
-      ],
-    );
-  }
 
   Widget checkRow(double width) {
     return Container(
@@ -275,6 +210,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
               onChanged: (bool? value) {
                 setState(() {
                   isCheckedH = value!;
+                  hipertension = 'Cuenta con Hipertensión';
                 });
               },
             )
@@ -290,6 +226,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
               onChanged: (bool? value) {
                 setState(() {
                   isCheckedD = value!;
+                  diabetes = 'Cuenta con Diabetes';
                 });
               },
             )
@@ -305,6 +242,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
               onChanged: (bool? value) {
                 setState(() {
                   isCheckedA = value!;
+                  Artritis = 'Cuenta con Art/Ost';
                 });
               },
             )
@@ -313,13 +251,14 @@ class _RegistroScreenState extends State<RegistroScreen> {
         Container(
           width: 350 / 4,
           child: Column(children: [
-            Text('E. Pulmonarr', style: TextStyle(fontWeight: FontWeight.w600)),
+            Text('E. Pulmonar', style: TextStyle(fontWeight: FontWeight.w600)),
             Checkbox(
               fillColor: MaterialStateProperty.all(Colors.blue),
               value: isCheckedP,
               onChanged: (bool? value) {
                 setState(() {
                   isCheckedP = value!;
+                  enf_pulmonar = 'Cuenta con Enfermedad pulmonar';
                 });
               },
             )
@@ -343,16 +282,14 @@ class _RegistroScreenState extends State<RegistroScreen> {
         ));
   }
 
-  void getHttp() async {
-  try {
-    var response = await Dio().get('http://www.google.com');
-    print(response);
-  } catch (e) {
-    print(e);
-  }
-}
 
   Future register() async {
+
+    String otras_enfermedades = '${hipertension}, ${diabetes}, ${Artritis}, ${enf_pulmonar}';
+
+
+    print('enfermedades');
+    print(otras_enfermedades);
 
     final data = {
       "nombre": txtNombre.text,
@@ -361,9 +298,9 @@ class _RegistroScreenState extends State<RegistroScreen> {
       "fecha_nacimiento": txtFechaN.text,
       "ocupacion": txtOcupacion.text,
       "direccion": txtDireccion.text,
+      "enfermedad_cronica": txtEnfermedadC.text,
+      "otra_enfermedad": otras_enfermedades
     };
-
-    print(data.entries);
 
     var response = await Dio().get("https://www.phisio-t.com/registro_paciente.php", queryParameters: data);
 
@@ -371,43 +308,17 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
 
 Future.delayed(const Duration(seconds: 1), () {
-  //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(),),);
+
    Fluttertoast.showToast(
           msg: "Se ha registrado el paciente con exito"
       );
    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-});
-    //var data = json.decode(response.body);
-    //if (data == "Success") {
-      //correo.clear();
-      //contrasena.clear();
-     
-    //} else {
-      //Fluttertoast.showToast(
-        //  msg: "Registro incorrecto"
-      //);
+   
+  });
 
-    //}
   }
 }
 
-class AlwaysDisabledFocusNode extends FocusNode {
-  @override
-  bool get hasFocus => false;
-}
 
-/*Se crean los Items de la barra de navegacion inferior*/
-
-enum TabItem { Expediente, Agenda }
-
-const Map<TabItem, String> tabName = {
-  TabItem.Expediente: 'Expediente',
-  TabItem.Agenda: 'Agenda',
-};
-
-const Map<TabItem, MaterialColor> activeTabColor = {
-  TabItem.Expediente: Colors.lightBlue,
-  TabItem.Agenda: Colors.lightBlue,
-};
 
 

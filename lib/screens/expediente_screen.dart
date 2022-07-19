@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:phisio_t/widgets/drawer.dart';
 
@@ -20,8 +22,8 @@ class ExpedienteScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<ExpedienteScreen> {
-  double _currentSliderValue = 0;
-  double _currentSliderValue2 = 0;
+  double _nivel_dolorValue = 0;
+  double _nivel_inflamacionValue = 0;
 
   final now = new DateTime.now();
 
@@ -29,7 +31,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
     super.initState();
   }
 
-  final TextEditingController txtBusqueda = TextEditingController();
+  final TextEditingController txtDescripcion = TextEditingController();
   final TextEditingController txtTA = TextEditingController();
   final TextEditingController txtFC = TextEditingController();
   final TextEditingController txt02 = TextEditingController();
@@ -152,7 +154,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                               decoration: BoxDecoration(
                                                   border: Border.all(color: Colors.blue)),
                                               child: TextField(
-                                                controller: txtBusqueda,
+                                                controller: txtDescripcion,
                                                 keyboardType: TextInputType.multiline,
                                                 minLines: null,
                                                 maxLines: null,
@@ -163,11 +165,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
                                               ),
                                             ),
-                                           boton('Guardar', Colors.green, 13, () {
-
-                                             print('${now.year}-${now.month}-${now.day}');
-
-                                           })
+                                           boton('Guardar', Colors.green, 13, () => register(widget.paciente))
                                         ]),
                                       ),
                                       Container(
@@ -270,17 +268,17 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                   Border.all(color: Colors.blue),
                                             ),
                                             child: Slider(
-                                              value: _currentSliderValue2,
+                                              value: _nivel_dolorValue,
                                               max: 100,
                                               divisions: 10,
                                               activeColor: Colors.red,
                                               inactiveColor: Colors.green,
-                                              label: _currentSliderValue2
+                                              label: _nivel_dolorValue
                                                   .round()
                                                   .toString(),
                                               onChanged: (double value) {
                                                 setState(() {
-                                                  _currentSliderValue2 = value;
+                                                  _nivel_dolorValue = value;
                                                 });
                                               },
                                             ),
@@ -302,17 +300,17 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                   Border.all(color: Colors.blue),
                                             ),
                                             child: Slider(
-                                              value: _currentSliderValue,
+                                              value: _nivel_inflamacionValue,
                                               max: 100,
                                               divisions: 10,
                                               activeColor: Colors.red,
                                               inactiveColor: Colors.green,
-                                              label: _currentSliderValue
+                                              label: _nivel_inflamacionValue
                                                   .round()
                                                   .toString(),
                                               onChanged: (double value) {
                                                 setState(() {
-                                                  _currentSliderValue = value;
+                                                  _nivel_inflamacionValue = value;
                                                 });
                                               },
                                             ),
@@ -447,7 +445,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                         decoration: BoxDecoration(
                                             border: Border.all(color: Colors.blue)),
                                         child: TextField(
-                                          controller: txtBusqueda,
+                                          controller: txtDescripcion,
                                           keyboardType: TextInputType.multiline,
                                           minLines: null,
                                           maxLines: null,
@@ -477,17 +475,17 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                           Border.all(color: Colors.blue),
                                         ),
                                         child: Slider(
-                                          value: _currentSliderValue2,
+                                          value: _nivel_dolorValue,
                                           max: 100,
                                           divisions: 10,
                                           activeColor: Colors.red,
                                           inactiveColor: Colors.green,
-                                          label: _currentSliderValue2
+                                          label: _nivel_dolorValue
                                               .round()
                                               .toString(),
                                           onChanged: (double value) {
                                             setState(() {
-                                              _currentSliderValue2 = value;
+                                              _nivel_dolorValue = value;
                                             });
                                           },
                                         ),
@@ -509,17 +507,17 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                           Border.all(color: Colors.blue),
                                         ),
                                         child: Slider(
-                                          value: _currentSliderValue,
+                                          value: _nivel_inflamacionValue,
                                           max: 100,
                                           divisions: 10,
                                           activeColor: Colors.red,
                                           inactiveColor: Colors.green,
-                                          label: _currentSliderValue
+                                          label: _nivel_inflamacionValue
                                               .round()
                                               .toString(),
                                           onChanged: (double value) {
                                             setState(() {
-                                              _currentSliderValue = value;
+                                              _nivel_inflamacionValue = value;
                                             });
                                           },
                                         ),
@@ -600,7 +598,7 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          boton('Guardar', Colors.green, 13, () {}),
+                                          boton('Guardar', Colors.green, 13, () => register(widget.paciente)),
 
                                           boton('Cancelar', Colors.red, 50, () {
 
@@ -632,6 +630,37 @@ class _HomeScreenState extends State<ExpedienteScreen> {
             backgroundColor: MaterialStateProperty.all<Color>(color),
           ),
         ));
+  }
+
+
+  Future register(Paciente paciente) async {
+
+    final data = {
+      "paciente_id": int.parse(paciente.id),
+      "descripcion": txtDescripcion.text,
+      "nivel_dolor": _nivel_dolorValue.toString(),
+      "nivel_inflamacion": _nivel_inflamacionValue.toString(),
+      "signo_ta": txtTA.text,
+      "signo_fc": txtFC.text,
+      "signo_o2": txt02.text,
+      "fecha": '${now.year}-${now.month}-${now.day}'
+    };
+
+    print(data.entries);
+
+    var response = await Dio().get("https://www.phisio-t.com/registro_expediente.php", queryParameters: data);
+
+    print('${response.data}');
+
+
+    Future.delayed(const Duration(seconds: 1), () {
+      //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(),),);
+      Fluttertoast.showToast(
+          msg: "Se ha registrado el expediente con exito"
+      );
+      //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    });
+
   }
 
 

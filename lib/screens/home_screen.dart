@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:phisio_t/screens/historial_screen.dart';
 import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
 import 'package:phisio_t/widgets/drawer.dart';
@@ -279,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 margin: width > 450 ? const EdgeInsets.only(top: 40) : const EdgeInsets.only(top: 20),
                 child: boton('Historial', Colors.grey, 60, () {
-                  //Navigator.push(context, MaterialPageRoute(builder: (context) => ExpedienteScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HistorialScreen()));
                 }, width),
               ),
             ],

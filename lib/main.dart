@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phisio_t/screens/expediente_screen.dart';
+import 'package:phisio_t/screens/historial_screen.dart';
 import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
 import 'package:phisio_t/utils/colores.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
                 //bodyColor: Colors.white,
                 //displayColor: Colors.black
               )),
-      home: HomeScreen(),
+      home: HistorialScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

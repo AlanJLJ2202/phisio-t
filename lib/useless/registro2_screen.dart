@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:phisio_t/screens/registro_screen.dart';
-
 import '../widgets/drawer.dart';
-import '../widgets/navigationbar_widget.dart';
-import '../screens/home_screen.dart';
 
 class Registro2Screen extends StatefulWidget {
   @override
