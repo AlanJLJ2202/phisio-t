@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:phisio_t/screens/expediente_screen.dart';
+import 'package:phisio_t/screens/ver_expediente_screen.dart';
 import '../models/expediente.dart';
 import '../models/paciente.dart';
 import '../widgets/drawer.dart';
@@ -66,7 +67,7 @@ class _HistorialScreenState extends State<HistorialScreen> {
                        style: TextStyle(fontSize: 35, fontWeight: FontWeight.w800),
                     ),
                   ),
-              
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -205,26 +206,31 @@ class _HistorialScreenState extends State<HistorialScreen> {
 
   Widget infoExpediente(Expediente expediente, BuildContext context, double width){
 
-    return Container(
-        margin: EdgeInsets.only(bottom: 20),
-        height: 150,
-        width: 360,
-        decoration: BoxDecoration(
-        border: Border.all(color: Colors.deepOrangeAccent, width: 2),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(25),
-        ),),
-        child: Column(
-          children: [
-            Container(
-              child: Text('${expediente.fecha}', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Text(expediente.descripcion.length > 150 ? expediente.descripcion.substring(0, 150)+'...' : '${expediente.descripcion}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-            )
-          ],
-        ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => VerExpedienteScreen(widget.paciente, expediente)));
+      },
+      child: Container(
+          margin: EdgeInsets.only(bottom: 20),
+          height: 150,
+          width: 360,
+          decoration: BoxDecoration(
+          border: Border.all(color: Colors.deepOrangeAccent, width: 2),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(25),
+          ),),
+          child: Column(
+            children: [
+              Container(
+                child: Text('${expediente.fecha}', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(expediente.descripcion.length > 150 ? expediente.descripcion.substring(0, 150)+'...' : '${expediente.descripcion}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+              )
+            ],
+          ),
+      ),
     );
   }
 

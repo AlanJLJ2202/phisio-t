@@ -554,10 +554,11 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                   width: 200,
 
                                                   //color: Colors.green,
-                                                  child: const TextField(
+                                                  child: TextField(
                                                     //scrollPadding: EdgeInsets.only(bottom: 10),
-                                                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
-                                                    decoration: InputDecoration(
+                                                    controller: txtTA,
+                                                    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
+                                                    decoration: const InputDecoration(
                                                       labelText: 'TA',
                                                       floatingLabelAlignment: FloatingLabelAlignment.center,
                                                       labelStyle: TextStyle(
@@ -572,9 +573,10 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                   margin: const EdgeInsets.only(top: 1),
                                                   height: 40,
                                                   width: 200,
-                                                  child: const TextField(
-                                                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
-                                                    decoration: InputDecoration(
+                                                  child: TextField(
+                                                    controller: txtFC,
+                                                    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
+                                                    decoration: const InputDecoration(
                                                       labelText: 'FC',
                                                       floatingLabelAlignment: FloatingLabelAlignment.center,
                                                       labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
@@ -586,9 +588,10 @@ class _HomeScreenState extends State<ExpedienteScreen> {
                                                   margin: const EdgeInsets.only(top: 1),
                                                   height: 40,
                                                   width: 200,
-                                                  child: const TextField(
-                                                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
-                                                    decoration: InputDecoration(
+                                                  child: TextField(
+                                                    controller: txt02,
+                                                    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 17),
+                                                    decoration: const InputDecoration(
                                                       labelText: 'O2',
                                                       floatingLabelAlignment: FloatingLabelAlignment.center,
                                                       labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.w900),
