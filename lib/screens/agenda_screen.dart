@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../widgets/drawer.dart';
+
 
 class AgendaScreen extends StatefulWidget{
 
   @override
   State<AgendaScreen> createState() => _AgendaScreenState();
+
 }
 
 class _AgendaScreenState extends State<AgendaScreen> {
 
-  CalendarView vista = CalendarView.month;
+  CalendarView vista = CalendarView.workWeek;
 
   Widget build(BuildContext context) {
 
+    double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
+        appBar: AppBar(
+          elevation: 20,
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+          title: const Text(
+            'Agenda',
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ),
+        ),
+        drawer: DrawerWidget(height),
         body: SfCalendar(
           view: vista,
+          firstDayOfWeek: 1,
+          //allowDragAndDrop: true,
+          //minDate: DateTime(2022-06),
           dataSource: MeetingDataSource(_getDataSource()),
             onTap: (CalendarTapDetails){
               setState(() {
@@ -30,10 +48,11 @@ class _AgendaScreenState extends State<AgendaScreen> {
               CalendarView.timelineDay,
               CalendarView.schedule
             ],
-            timeSlotViewSettings: TimeSlotViewSettings(
+            timeSlotViewSettings: const TimeSlotViewSettings(
                 startHour: 7,
                 endHour: 22,
             ),
+
           monthViewSettings: const MonthViewSettings(appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
         )
     );
@@ -45,8 +64,12 @@ class _AgendaScreenState extends State<AgendaScreen> {
     final DateTime today = DateTime.now();
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
-    meetings.add(Meeting('Hola', startTime, endTime, Colors.red, false));
+    meetings.add(Meeting('Alan', startTime, endTime, const Color(0xFF0F8644), false));
+    meetings.add(Meeting('Maria', DateTime(today.year, today.month, today.day, 11), DateTime(today.year, today.month, today.day, 13), Colors.red, false));
+    meetings.add(Meeting('Juan', DateTime(today.year, today.month, today.day, 15), DateTime(today.year, today.month, today.day, 16), Colors.blue, false));
+    meetings.add(Meeting('Maria', startTime, endTime, Colors.green, false));
+    //meetings.add(Meeting('Antonio Galan', startTime, endTime, Colors.orange, false));
+    //meetings.add(Meeting('Mario Valadez', startTime, endTime, Colors.purple, false));
     return meetings;
   }
 }

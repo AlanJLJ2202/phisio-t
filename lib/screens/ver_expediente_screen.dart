@@ -1,16 +1,9 @@
 import 'dart:ui';
 
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
-import 'package:phisio_t/screens/historial_screen.dart';
 import 'package:phisio_t/widgets/drawer.dart';
-
 import '../models/expediente.dart';
 import '../models/paciente.dart';
-import 'home_screen.dart';
 
 
 class VerExpedienteScreen extends StatefulWidget {

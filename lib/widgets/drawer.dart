@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:phisio_t/screens/agenda_screen.dart';
 
 import '../screens/expediente_screen.dart';
 import '../screens/home_screen.dart';
@@ -93,22 +94,22 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 height: 1,
                 color: Colors.blue,
               ),
-              /*ListTile(
-                title: const Text('Expedientes', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
-                leading: const Icon(Icons.folder_shared_outlined),
+              ListTile(
+                title: const Text('Agenda', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
+                leading: const Icon(Icons.calendar_month_sharp),
                 iconColor: Colors.blue,
                 onTap: () {
                   Navigator.pop(context);
                    Navigator.push(
                     context,
-                     MaterialPageRoute(builder: (context) => ExpedienteScreen()),
+                     MaterialPageRoute(builder: (context) => AgendaScreen()),
                   );
                 },
               ),
               const Divider(
                 height: 1,
                 color: Colors.blue,
-              ),*/
+              ),
               Container(
                 margin: EdgeInsets.only(top: widget.height*0.4),
                 width: 75,
