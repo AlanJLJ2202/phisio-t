@@ -5,6 +5,7 @@ import 'package:phisio_t/useless/registro2_screen.dart';
 import 'package:phisio_t/screens/registro_screen.dart';
 import 'package:phisio_t/utils/colores.dart';
 
+import 'screens/agenda_screen.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
                 //bodyColor: Colors.white,
                 //displayColor: Colors.black
               )),
-      home: HomeScreen(),
+      home: AgendaScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
