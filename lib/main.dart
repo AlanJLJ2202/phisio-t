@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
                 //bodyColor: Colors.white,
                 //displayColor: Colors.black
               )),
-      home: AgendaScreen(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
