@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:phisio_t/screens/expediente_screen.dart';
+import 'package:phisio_t/screens/home_screen.dart';
 import 'package:phisio_t/screens/ver_expediente_screen.dart';
 import '../models/expediente.dart';
 import '../models/paciente.dart';
@@ -67,6 +68,49 @@ class _HistorialScreenState extends State<HistorialScreen> {
                        style: TextStyle(fontSize: 35, fontWeight: FontWeight.w800),
                     ),
                   ),
+
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: ElevatedButton(
+                  onPressed: () {
+
+                    showDialog(context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text(
+                          '¿Estás segur@ que deseas eliminar el registro?', style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.w600),
+                        ),
+                        content: Text(
+                          'También se eliminara su expediente', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(false);
+                            },
+                            child: const Text('Cancelar', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600),),
+                          ),
+                          TextButton(
+                            onPressed: (){
+                              eliminar_paciente(widget.paciente);
+                              Future.delayed(const Duration(milliseconds: 250), () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                              });
+                            },
+                            child: const Text(
+                              'Aceptar', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+
+                  },
+                  child: Text('Eliminar'),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color> (Colors.red),
+                  ),
+                ),
+              ),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -252,6 +296,29 @@ class _HistorialScreenState extends State<HistorialScreen> {
     });
 
     print(lista_expedientes.asMap());
+
+  }
+
+
+
+  Future eliminar_paciente(Paciente paciente) async {
+
+    final data = {
+      "paciente_id": int.parse(paciente.id),
+    };
+
+    print(data.entries);
+
+    await Dio().get("https://www.phisio-t.com/eliminar_paciente.php", queryParameters: data);
+
+    /*var datos = jsonDecode(response.data);
+    print(datos);
+
+    setState(() {
+      lista_expedientes = List<Expediente>.from(datos.map((x) => Expediente.fromJson(x)));
+    });
+
+    print(lista_expedientes.asMap());*/
 
   }
 

@@ -50,11 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Column(children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                       margin: EdgeInsets.only(
-                          top: height * 0.08, left: width * 0.05),
+                          top: height * 0.08),
                       child: const Text('Buscar Paciente: ',
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.w900))),
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: inputField('', 350),
                   ),
                   Container(
-                      margin: EdgeInsets.only(top: height * 0.085),
+                      margin: EdgeInsets.only(top: height * 0.085, right: width * 0.03),
                       child: IconButton(
                         onPressed: () {
                           Future.delayed(const Duration(milliseconds: 350), () => _busqueda());
@@ -118,7 +118,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: inputField('', 275),
@@ -174,6 +173,9 @@ class _HomeScreenState extends State<HomeScreen> {
           child: TextField(
             controller: txtBusqueda,
             textAlign: TextAlign.center,
+            onSubmitted: (value) {
+              Future.delayed(const Duration(milliseconds: 350), () => _busqueda());
+            },
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(bottom: 15)
@@ -190,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //Navigator.push(context, MaterialPageRoute(builder: (context) => ExpedienteScreen(paciente)));
       },
       child: Container(
-        margin: width < 450 ? EdgeInsets.only(top: height * 0.06) : EdgeInsets.only(top: height * 0.08, right: 40),
+        margin: width < 450 ? EdgeInsets.only(top: height * 0.06) : EdgeInsets.only(top: height * 0.08, left: 20, right: 20),
         height: width > 450 ? 470 : 350,
         width: width > 450 ? 570 : 350,
         decoration: BoxDecoration(

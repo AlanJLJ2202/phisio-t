@@ -7,6 +7,7 @@ import 'package:phisio_t/utils/colores.dart';
 
 import 'screens/agenda_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,11 +25,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           primaryColor: Colores.celeste,
           textTheme: Theme.of(context).textTheme.apply(
-                fontFamily: "Raleway",
-                //bodyColor: Colors.white,
-                //displayColor: Colors.black
+                fontFamily: "Raleway"
               )),
-      home: HomeScreen(),
+      home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
